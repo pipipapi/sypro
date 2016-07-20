@@ -1,18 +1,8 @@
 package sy.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import sy.dao.ResourceDaoI;
 import sy.dao.RoleDaoI;
 import sy.dao.UserDaoI;
@@ -25,6 +15,8 @@ import sy.pageModel.SessionInfo;
 import sy.pageModel.User;
 import sy.service.UserServiceI;
 import sy.util.MD5Util;
+
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserServiceI {
@@ -43,6 +35,7 @@ public class UserServiceImpl implements UserServiceI {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", user.getName());
 		params.put("pwd", MD5Util.md5(user.getPwd()));
+        System.out.println(MD5Util.md5(user.getPwd()));
 		Tuser t = userDao.get("from Tuser t where t.name = :name and t.pwd = :pwd", params);
 		if (t != null) {
 			BeanUtils.copyProperties(t, user);
