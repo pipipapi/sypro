@@ -13,7 +13,7 @@ public class ForCircleTest {
 
     public static void main(String[] args) {
 
-        List<String> strList = new ArrayList<>();
+        List<String> strList = new ArrayList<String>();
         strList.add("1");
         strList.add("2");
         strList.add("3");
