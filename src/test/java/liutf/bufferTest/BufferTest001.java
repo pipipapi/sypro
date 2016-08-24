@@ -17,10 +17,8 @@ package liutf.bufferTest;
 public class BufferTest001 {
 
 	public static void main(String[] args) {
-		StringBuffer sbf = new StringBuffer();
-		sbf.append("hello ");
-		sbf.append("world !");
-		System.out.println(sbf.toString());
+		// CharBuffer cb = new CharBuffer(10);
+		// B
 	}
 
 }
