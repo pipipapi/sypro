@@ -1,6 +1,6 @@
 package liutf.JedisDemo;
 
-import liutf.JedisDemo.bean1.JavaBean;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.SerializationUtils;
 
 /**
@@ -11,14 +11,18 @@ public class JedisMain {
 //        JedisDemo.setJedis("key1", "value1");
 //        System.out.println(JedisDemo.getJedis("key1"));
 
-        JavaBean javaBean = new JavaBean();
-        javaBean.setName("name1");
-        javaBean.setAge(11);
-        JedisDemo.setJedisObj("bean",javaBean);
-        byte[] value = JedisDemo.getJedisObj("bean");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("key1", "value1");
+        jsonObject.put("key2", "value2");
 
-        Object result = SerializationUtils.deserialize(value);
-        //liutf.JedisDemo.bean2.JavaBean
+        JedisDemo.setJedisObj("jsonObject",jsonObject);
+
+
+        byte[] bytes = JedisDemo.getJedisObj("jsonObject");
+        JSONObject jsonObject1 = (JSONObject) SerializationUtils.deserialize(bytes);
+        System.out.println(jsonObject1.toString());
+
+        //TODO 尝试用这种方式解析
 
     }
 }

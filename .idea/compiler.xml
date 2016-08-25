@@ -27,8 +27,8 @@
         <module name="sypro" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="sypro" target="1.6" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="sypro" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
