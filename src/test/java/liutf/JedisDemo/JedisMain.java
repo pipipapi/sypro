@@ -1,6 +1,6 @@
 package liutf.JedisDemo;
 
-import com.alibaba.fastjson.JSONObject;
+import net.sf.json.JSONObject;
 import org.springframework.util.SerializationUtils;
 
 /**
@@ -18,7 +18,7 @@ public class JedisMain {
         JedisDemo.setJedisObj("jsonObject",jsonObject);
 
 
-        byte[] bytes = JedisDemo.getJedisObj("jsonObject");
+        byte[] bytes = JedisDemo.getJedisObj("cms_middle_sales_productlist_1_20_2");
         JSONObject jsonObject1 = (JSONObject) SerializationUtils.deserialize(bytes);
         System.out.println(jsonObject1.toString());
 

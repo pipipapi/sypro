@@ -12,7 +12,7 @@ public class JedisDemo {
     public static void setJedis(String key, String value) {
         Jedis jedis = null;
         try {
-            jedis = new Jedis("192.168.98.166", 6379);
+            jedis = new Jedis("123.59.36.200", 6379);
             jedis.set(key, value);
         } catch (Exception e) {
             e.printStackTrace();
@@ -27,7 +27,7 @@ public class JedisDemo {
         String result = "";
         Jedis jedis = null;
         try {
-            jedis = new Jedis("192.168.98.166", 6379);
+            jedis = new Jedis("123.59.36.200", 6379);
             result = jedis.get(key);
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class JedisDemo {
     public static void setJedisObj(String key, Object value) {
         Jedis jedis = null;
         try {
-            jedis = new Jedis("192.168.98.166", 6379);
+            jedis = new Jedis("123.59.36.200", 6379);
             jedis.set(key.getBytes(), SerializationUtils.serialize(value));
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class JedisDemo {
         byte[] result = null;
         Jedis jedis = null;
         try {
-            jedis = new Jedis("192.168.98.166", 6379);
+            jedis = new Jedis("123.59.36.200", 6379);
             result = jedis.get(key.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
