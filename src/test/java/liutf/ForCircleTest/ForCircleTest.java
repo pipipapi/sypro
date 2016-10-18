@@ -1,7 +1,6 @@
 package liutf.ForCircleTest;
 
-import java.util.ArrayList;
-import java.util.List;
+import net.sf.json.JSONObject;
 
 /**
  * ${DESCRIPTION}
@@ -13,10 +12,10 @@ public class ForCircleTest {
 
     public static void main(String[] args) {
 
-        List<String> strList = new ArrayList<String>();
-        strList.add("1");
-        strList.add("2");
-        strList.add("3");
+        //List<String> strList = new ArrayList<String>();
+        //strList.add("1");
+        //strList.add("2");
+        //strList.add("3");
         //for (String str : strList) {
         //    if ("2".equals(str) || "1".equals(str)) {
         //        strList.remove((Object) str);
@@ -42,6 +41,15 @@ public class ForCircleTest {
         //}
         //
         //System.out.println(strList.toString());
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("key1","value1");
+        jsonObject.put("key2","value2");
+        System.out.println(jsonObject.toString());
+
+
+        String str = jsonObject.toString().replace("\"","\\\"");
+        System.out.println(str);
 
 
     }
