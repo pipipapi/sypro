@@ -1,7 +1,5 @@
 package liutf.ForCircleTest;
 
-import net.sf.json.JSONObject;
-
 /**
  * ${DESCRIPTION}
  *
@@ -42,14 +40,14 @@ public class ForCircleTest {
         //
         //System.out.println(strList.toString());
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("key1","value1");
-        jsonObject.put("key2","value2");
-        System.out.println(jsonObject.toString());
-
-
-        String str = jsonObject.toString().replace("\"","\\\"");
-        System.out.println(str);
+        //JSONObject jsonObject = new JSONObject();
+        //jsonObject.put("key1","value1");
+        //jsonObject.put("key2","value2");
+        //System.out.println(jsonObject.toString());
+        //
+        //
+        //String str = jsonObject.toString().replace("\"","\\\"");
+        //System.out.println(str);
 
 
     }
