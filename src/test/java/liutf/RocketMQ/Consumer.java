@@ -18,22 +18,31 @@ import java.util.List;
  * @create 2016-10-19 下午 3:38
  **/
 public class Consumer {
+
+    private static final String NAMESRV_ADDR = "192.168.98.232:9876";
+
     public static void main(String[] args) throws Exception {
+        defaultMQPushConsumerTest();
+    }
+
+    public static void defaultMQPushConsumerTest() {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("PushConsumer");
-        consumer.setNamesrvAddr("192.168.98.134:9876");
+        consumer.setNamesrvAddr(NAMESRV_ADDR);
         try {
             //订阅PushTopic下Tag为push的消息
-            consumer.subscribe("MyMQTest", "push");
+            String tag = "B";
+            consumer.subscribe("MyMQTest", tag);
             //程序第一次启动从消息队列头取数据
             consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
             consumer.registerMessageListener(
                     new MessageListenerConcurrently() {
                         public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext Context) {
-                            Message msg = list.get(0);
-                            try {
-                                System.out.println(new String(msg.getBody(), "UTF-8"));
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
+                            for (Message msg : list) {
+                                try {
+                                    System.out.println(new String(msg.getBody(), "UTF-8"));
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
                             }
                             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                         }
