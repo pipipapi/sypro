@@ -1,8 +1,5 @@
 package liutf.jsonTest;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
 /**
  * Json测试
  *
@@ -11,12 +8,35 @@ import com.alibaba.fastjson.JSONObject;
  **/
 public class JsonTest {
 
+
     public static void main(String[] args) {
-        JSONObject jsonObject = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.add("test11");
-        jsonArray.add("test22");
-        jsonObject.put("jsonObject", jsonArray);
-        System.out.println(jsonObject.toString());
+        //JsonObject
+    }
+}
+
+/**
+ * The type Test bean.
+ */
+class TestBean {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "TestBean{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

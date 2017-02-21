@@ -3,6 +3,7 @@ package liutf.log;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +21,7 @@ public class OnLineLogFilesCarding {
 
     //对比文本数组
     public static final String[] COMP_STR_ARRAY = {
-            "org.springframework.web.method.support.InvocableHandlerMethod.invoke"
+            "绑定接口异常"
     };
 
     //日志文件网络地址数组
@@ -55,7 +56,12 @@ public class OnLineLogFilesCarding {
 
         //读取，解析文件
         for (String strUrl : strUrlArray) {
-            readLog(strUrl, outFileUrl);
+            try {
+                readLog(strUrl, outFileUrl);
+            } catch (FileNotFoundException fe) {
+                System.out.println("文件：" + strUrl + "不存在");
+            }
+
         }
 
         System.out.println("输出目录：" + outFileUrl);

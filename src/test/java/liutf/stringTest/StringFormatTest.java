@@ -24,9 +24,13 @@ public class StringFormatTest {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String format = "my name is %s , my age is %s";
-		String result = String.format(format, "liutf","27");
-		System.out.println("result-->"+result);
+		//String format = "my name is %s , my age is %s";
+		//String result = String.format(format, "liutf","27");
+		//System.out.println("result-->"+result);
+
+
+		String str = "12345678";
+		System.out.println(str.substring(0,3));
 	}
 
 }

@@ -1,5 +1,10 @@
 package liutf.ForCircleTest;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * ${DESCRIPTION}
  *
@@ -10,47 +15,61 @@ public class ForCircleTest {
 
     public static void main(String[] args) {
 
-        //List<String> strList = new ArrayList<String>();
-        //strList.add("1");
-        //strList.add("2");
-        //strList.add("3");
-        //for (String str : strList) {
-        //    if ("2".equals(str) || "1".equals(str)) {
-        //        strList.remove((Object) str);
-        //    }
-        //}
-
-        //Iterator<String> iterator = strList.iterator();
-        //while (iterator.hasNext()){
-        //    String str = iterator.next();
-        //    if("1".equals(str) || "2".equals(str)){
-        //        strList.remove(str);
-        //    }
-        //    System.out.println(str);
-        //}
-
-        //for (int i = 0; i < strList.size(); i++) {
-        //    //System.out.println(i);
-        //    String str = strList.get(i);
-        //    if ("3".equals(str)) {
-        //        strList.remove(i);
-        //        i--;
-        //    }
-        //}
-        //
-        //System.out.println(strList.toString());
-
-        //JSONObject jsonObject = new JSONObject();
-        //jsonObject.put("key1","value1");
-        //jsonObject.put("key2","value2");
-        //System.out.println(jsonObject.toString());
-        //
-        //
-        //String str = jsonObject.toString().replace("\"","\\\"");
-        //System.out.println(str);
-
+        List<Long> suIds = new ArrayList<>();
+        for(int i=0;i<200;i++){
+            suIds.add(new Long(i + 1));
+        }
+        checkInventoryBySus(suIds);
 
     }
+
+    public static List<Long> checkInventoryBySus(List<Long> suIds) {
+        int maxNum = 99;// 库存server最大支持99个su同时校验
+        StringBuffer nums = new StringBuffer();
+        StringBuffer suIdBuffer = new StringBuffer();
+        Map<Long, Integer> canBuyNum = new HashMap<Long, Integer>();
+        Map<Long, Integer> result = null;
+        for (int i = 0; i < suIds.size(); i++) {
+            if (suIdBuffer.length() != 0) {
+                nums.append(",");
+                suIdBuffer.append(",");
+            }
+            if (i > 0 && i % maxNum == 0) {
+                //result = SocketClient.checkStockLong(suIdBuffer.toString(), nums.toString());
+                //if (result != null) {
+                //    canBuyNum.putAll(result);
+                //}
+
+                System.out.println("-------------------1--------------------");
+                System.out.println(suIdBuffer.toString());
+                System.out.println(nums.toString().split(",").length);
+                suIdBuffer = new StringBuffer();
+                nums = new StringBuffer();
+
+            }
+            suIdBuffer.append(suIds.get(i));
+            nums.append("1");
+        }
+        List<Long> canNotBuyList = new ArrayList<Long>();
+        if (suIdBuffer.length() > 0) {
+            //result = SocketClient.checkStockLong(suIdBuffer.toString(), nums.toString());
+            //if (result != null) {
+            //    canBuyNum.putAll(result);
+            //}
+            System.out.println("-------------------2--------------------");
+            System.out.println(suIdBuffer.toString());
+            System.out.println(nums.toString().split(",").length);
+        }
+        if (canBuyNum != null) {
+            for (Long suId : canBuyNum.keySet()) {
+                if (canBuyNum.get(suId) == 0) {
+                    canNotBuyList.add(suId);
+                }
+            }
+        }
+        return canNotBuyList;
+    }
+
 
 
 }
