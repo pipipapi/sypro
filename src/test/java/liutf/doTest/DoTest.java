@@ -53,6 +53,10 @@ public class DoTest {
 
         //Map<Integer,Map<Long,>>
 
+        String key = "b";
+        int hashCode = key.hashCode();
+        System.out.println(hashCode);
+
 
 
     }

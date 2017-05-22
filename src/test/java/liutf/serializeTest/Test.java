@@ -3,7 +3,6 @@ package liutf.serializeTest;
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
-import org.apache.commons.lang.SerializationUtils;
 
 /**
  * ${DESCRIPTION}
@@ -18,14 +17,14 @@ public class Test {
 
     public static void main(String[] args) {
 
-        //TestBean testBean = new TestBean();
-        //testBean.setAge(9);
-        //testBean.setName("name");
-        //testBean.setSex(true);
+        TestBean testBean = new TestBean();
+        testBean.setAge(9);
+        testBean.setName("name");
+        testBean.setSex(true);
 
         //long startTime = System.currentTimeMillis();
         //for (int i = 0; i < 10000; i++) {
-            //byte[] bytes = serialize(testBean);
+        byte[] bytes = serialize(testBean);
         //}
         //long endTime = System.currentTimeMillis();
         //System.out.println(endTime-startTime);
@@ -34,30 +33,27 @@ public class Test {
 
         //long startTime = System.currentTimeMillis();
         //for (int i = 0; i < 10000; i++) {
-        //    TestBean testBean1 = unSerialize(bytes);
+        TestBean testBean1 = unSerialize(bytes);
         //}
         //long endTime = System.currentTimeMillis();
         ////System.out.println(testBean1);
         //System.out.println(endTime-startTime);
 
 
-        TestBean1 testBean = new TestBean1();
-        testBean.setAge(9);
-        testBean.setName("name");
-        testBean.setSex(true);
-
-        byte[] bytes = SerializationUtils.serialize(testBean);
-
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            SerializationUtils.deserialize(bytes);
-        }
-        long endTime = System.currentTimeMillis();
-        System.out.println(endTime-startTime);
+        //TestBean1 testBean = new TestBean1();
+        //testBean.setAge(9);
+        //testBean.setName("name");
+        //testBean.setSex(true);
+        //
+        //byte[] bytes = SerializationUtils.serialize(testBean);
+        //
+        //long startTime = System.currentTimeMillis();
+        //for (int i = 0; i < 10000; i++) {
+        //    SerializationUtils.deserialize(bytes);
+        //}
+        //long endTime = System.currentTimeMillis();
+        //System.out.println(endTime-startTime);
         //System.out.println(bytes.length);
-
-
-
 
     }
 
