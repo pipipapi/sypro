@@ -1,3 +1,4 @@
+/*
 package sy.controller;
 
 import java.io.File;
@@ -31,24 +32,28 @@ import sy.comparator.SizeComparator;
 import sy.comparator.TypeComparator;
 import sy.util.ConfigUtil;
 
+*/
 /**
  * 文件控制器
  * 
  * @author 孙宇
  * 
- */
+ *//*
+
 @Controller
 @RequestMapping("/fileController")
 public class FileController extends BaseController {
 
-	/**
+	*/
+/**
 	 * 浏览器服务器附件
 	 * 
 	 * @param response
 	 * @param request
 	 * @param session
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/fileManage")
 	@ResponseBody
 	public Map<String, Object> fileManage(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
@@ -174,13 +179,15 @@ public class FileController extends BaseController {
 		return m;
 	}
 
-	/**
+	*/
+/**
 	 * 
 	 * @param response
 	 * @param request
 	 * @param session
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/upload")
 	@ResponseBody
 	public Map<String, Object> upload(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
@@ -296,3 +303,4 @@ public class FileController extends BaseController {
 	}
 
 }
+*/

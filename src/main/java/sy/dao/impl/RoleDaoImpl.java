@@ -1,11 +1,12 @@
+
 package sy.dao.impl;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import sy.dao.IDaoService;
 
-import sy.dao.RoleDaoI;
-import sy.model.Trole;
-
-@Repository
-public class RoleDaoImpl extends BaseDaoImpl<Trole> implements RoleDaoI {
+@Service
+public class RoleDaoImpl extends BaseDaoServiceImpl implements IDaoService {
 
 }
+

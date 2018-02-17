@@ -1,3 +1,4 @@
+/*
 package sy.interceptors;
 
 import java.util.List;
@@ -12,12 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 import sy.pageModel.SessionInfo;
 import sy.util.ConfigUtil;
 
+*/
 /**
  * 权限拦截器
  * 
  * @author 孙宇
  * 
- */
+ *//*
+
 public class SecurityInterceptor implements HandlerInterceptor {
 
 	private static final Logger logger = Logger.getLogger(SecurityInterceptor.class);
@@ -32,25 +35,31 @@ public class SecurityInterceptor implements HandlerInterceptor {
 		this.excludeUrls = excludeUrls;
 	}
 
-	/**
+	*/
+/**
 	 * 完成页面的render后调用
-	 */
+	 *//*
+
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception exception) throws Exception {
 
 	}
 
-	/**
+	*/
+/**
 	 * 在调用controller具体方法后拦截
-	 */
+	 *//*
+
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object object, ModelAndView modelAndView) throws Exception {
 
 	}
 
-	/**
+	*/
+/**
 	 * 在调用controller具体方法前拦截
-	 */
+	 *//*
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 		String requestUri = request.getRequestURI();
@@ -78,3 +87,4 @@ public class SecurityInterceptor implements HandlerInterceptor {
 		return true;
 	}
 }
+*/

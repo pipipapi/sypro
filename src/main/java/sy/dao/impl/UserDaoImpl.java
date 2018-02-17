@@ -1,11 +1,12 @@
+
 package sy.dao.impl;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import sy.dao.IDaoService;
 
-import sy.dao.UserDaoI;
-import sy.model.Tuser;
-
-@Repository
-public class UserDaoImpl extends BaseDaoImpl<Tuser> implements UserDaoI {
+@Service
+public class UserDaoImpl extends BaseDaoServiceImpl implements IDaoService {
 
 }
+

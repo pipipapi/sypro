@@ -1,3 +1,4 @@
+/*
 package sy.controller;
 
 import java.util.List;
@@ -19,12 +20,14 @@ import sy.service.ResourceServiceI;
 import sy.service.ResourceTypeServiceI;
 import sy.util.ConfigUtil;
 
+*/
 /**
  * 资源控制器
  * 
  * @author 孙宇
  * 
- */
+ *//*
+
 @Controller
 @RequestMapping("/resourceController")
 public class ResourceController extends BaseController {
@@ -35,14 +38,16 @@ public class ResourceController extends BaseController {
 	@Autowired
 	private ResourceTypeServiceI resourceTypeService;
 
-	/**
+	*/
+/**
 	 * 获得资源树(资源类型为菜单类型)
 	 * 
 	 * 通过用户ID判断，他能看到的资源
 	 * 
 	 * @param session
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/tree")
 	@ResponseBody
 	public List<Tree> tree(HttpSession session) {
@@ -50,14 +55,16 @@ public class ResourceController extends BaseController {
 		return resourceService.tree(sessionInfo);
 	}
 
-	/**
+	*/
+/**
 	 * 获得资源树(包括所有资源类型)
 	 * 
 	 * 通过用户ID判断，他能看到的资源
 	 * 
 	 * @param session
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/allTree")
 	@ResponseBody
 	public List<Tree> allTree(HttpSession session) {
@@ -65,21 +72,25 @@ public class ResourceController extends BaseController {
 		return resourceService.allTree(sessionInfo);
 	}
 
-	/**
+	*/
+/**
 	 * 跳转到资源管理页面
 	 * 
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/manager")
 	public String manager() {
 		return "/admin/resource";
 	}
 
-	/**
+	*/
+/**
 	 * 跳转到资源添加页面
 	 * 
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/addPage")
 	public String addPage(HttpServletRequest request) {
 		request.setAttribute("resourceTypeList", resourceTypeService.getResourceTypeList());
@@ -89,11 +100,13 @@ public class ResourceController extends BaseController {
 		return "/admin/resourceAdd";
 	}
 
-	/**
+	*/
+/**
 	 * 添加资源
 	 * 
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/add")
 	@ResponseBody
 	public Json add(Resource resource, HttpSession session) {
@@ -105,11 +118,13 @@ public class ResourceController extends BaseController {
 		return j;
 	}
 
-	/**
+	*/
+/**
 	 * 跳转到资源编辑页面
 	 * 
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
 		request.setAttribute("resourceTypeList", resourceTypeService.getResourceTypeList());
@@ -118,12 +133,14 @@ public class ResourceController extends BaseController {
 		return "/admin/resourceEdit";
 	}
 
-	/**
+	*/
+/**
 	 * 编辑资源
 	 * 
 	 * @param resource
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/edit")
 	@ResponseBody
 	public Json edit(Resource resource) {
@@ -134,13 +151,15 @@ public class ResourceController extends BaseController {
 		return j;
 	}
 
-	/**
+	*/
+/**
 	 * 获得资源列表
 	 * 
 	 * 通过用户ID判断，他能看到的资源
 	 * 
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/treeGrid")
 	@ResponseBody
 	public List<Resource> treeGrid(HttpSession session) {
@@ -148,12 +167,14 @@ public class ResourceController extends BaseController {
 		return resourceService.treeGrid(sessionInfo);
 	}
 
-	/**
+	*/
+/**
 	 * 删除资源
 	 * 
 	 * @param id
 	 * @return
-	 */
+	 *//*
+
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Json delete(String id) {
@@ -165,3 +186,4 @@ public class ResourceController extends BaseController {
 	}
 
 }
+*/

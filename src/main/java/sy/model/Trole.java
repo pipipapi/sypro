@@ -1,27 +1,11 @@
 package sy.model;
 
+import com.dap.dao.BasePo;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
-@Entity
-@Table(name = "trole")
-@DynamicInsert(true)
-@DynamicUpdate(true)
-public class Trole implements java.io.Serializable {
+public class Trole extends BasePo {
 
 	private String id;
 	private Trole trole;
@@ -51,8 +35,6 @@ public class Trole implements java.io.Serializable {
 		this.tusers = tusers;
 	}
 
-	@Id
-	@Column(name = "ID", nullable = false, length = 36)
 	public String getId() {
 		return this.id;
 	}
@@ -61,8 +43,6 @@ public class Trole implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PID")
 	public Trole getTrole() {
 		return this.trole;
 	}
@@ -71,7 +51,6 @@ public class Trole implements java.io.Serializable {
 		this.trole = trole;
 	}
 
-	@Column(name = "NAME", nullable = false, length = 100)
 	public String getName() {
 		return this.name;
 	}
@@ -80,7 +59,6 @@ public class Trole implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "REMARK", length = 200)
 	public String getRemark() {
 		return this.remark;
 	}
@@ -89,7 +67,6 @@ public class Trole implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	@Column(name = "SEQ")
 	public Integer getSeq() {
 		return this.seq;
 	}
@@ -98,7 +75,6 @@ public class Trole implements java.io.Serializable {
 		this.seq = seq;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trole")
 	public Set<Trole> getTroles() {
 		return this.troles;
 	}
@@ -107,8 +83,6 @@ public class Trole implements java.io.Serializable {
 		this.troles = troles;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "trole_tresource", joinColumns = { @JoinColumn(name = "TROLE_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "TRESOURCE_ID", nullable = false, updatable = false) })
 	public Set<Tresource> getTresources() {
 		return this.tresources;
 	}
@@ -117,8 +91,6 @@ public class Trole implements java.io.Serializable {
 		this.tresources = tresources;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tuser_trole", joinColumns = { @JoinColumn(name = "TROLE_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "TUSER_ID", nullable = false, updatable = false) })
 	public Set<Tuser> getTusers() {
 		return this.tusers;
 	}

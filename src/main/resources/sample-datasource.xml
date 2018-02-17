@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="AMQHRTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="AMQHRTransactionManager" order="2" />
+	
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+        init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${appdemo.datasource.driverClassName}" />
+        <property name="url" value="${appdemo.datasource.url}" />
+        <property name="username" value="${appdemo.datasource.username}" />
+        <property name="password" value="${appdemo.datasource.password}" />
+        <property name="filters" value="${appdemo.datasource.filters}" />
+		<property name="connectionProperties" value="${appdemo.datasource.connectionProperties}" />
+		<property name="initialSize" value="${appdemo.datasource.initialSize}" />
+		<property name="minIdle" value="${appdemo.datasource.minIdle}" />
+		<property name="maxActive" value="${appdemo.datasource.maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${appdemo.datasource.maxWait}" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${appdemo.datasource.timeBetweenEvictionRunsMillis}" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${appdemo.datasource.minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${appdemo.datasource.validationQuery}" />
+		<property name="testWhileIdle" value="${appdemo.datasource.testWhileIdle}" />
+		<property name="testOnBorrow" value="${appdemo.datasource.testOnBorrow}" />
+		<property name="testOnReturn" value="${appdemo.datasource.testOnReturn}" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="${appdemo.datasource.poolPreparedStatements}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="${appdemo.datasource.maxPoolPreparedStatementPerConnectionSize}" />
+
+		<!-- 打开removeAbandoned功能 -->
+		<property name="removeAbandoned" value="${appdemo.datasource.removeAbandoned}" />
+		<!-- 1800秒，也就是30分钟 -->
+		<property name="removeAbandonedTimeout" value="${appdemo.datasource.removeAbandonedTimeout}" />
+		<!-- 关闭abanded连接时输出错误日志 -->
+		<property name="logAbandoned" value="${appdemo.datasource.logAbandoned}" />
+	
+    </bean>
+
+	<!-- mybatis session 工厂类  -->
+	<bean id="SQLSESSION_FACTORY" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:service/ds/mybatis/mybatis-config.xml" /> 
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:service/ds/mybatis/mappers/*.xml</value>
+			</list>
+		</property>
+		<property name="transactionFactory">
+		    <bean class="org.mybatis.spring.transaction.SpringManagedTransactionFactory" />
+		</property>
+	</bean>
+	
+	<!-- 数据访问对象 -->
+	<bean id="DAO_SUPPORT" class="com.dap.dao.mybatis.DaoSupportImpl" init-method="initPropertyColumnMapper">
+		<property name="sqlSessionFactory" ref="SQLSESSION_FACTORY" />
+	</bean>
+	<bean id="daoService" class="com.sbp.trader.service.ds.impl.DaoServiceImpl" parent="DAO_SUPPORT" />
+	
+	<aop:config>
+		<!-- BS trace -->
+		<aop:aspect ref="_dapBS_traceAOP" order="0">
+			<aop:pointcut id="TRACELOG_BS_POINTCUT" expression="execution(* com.sbp.*.service.bs..*(..))" />
+			<aop:around method="traceLog" pointcut-ref="TRACELOG_BS_POINTCUT" />
+		</aop:aspect>
+		<!-- CS trace -->
+		<aop:aspect ref="_dapCS_traceAOP" order="0">
+			<aop:pointcut id="TRACELOG_CS_POINTCUT" expression="execution(* com.sbp.*.service.cs..*(..))" />
+			<aop:around method="traceLog" pointcut-ref="TRACELOG_CS_POINTCUT" />
+		</aop:aspect>
+		<!-- DS trace -->
+		<aop:aspect ref="_dapDS_traceAOP" order="0">
+			<aop:pointcut id="TRACELOG_DS_POINTCUT" expression="execution(* com.dap.dao.mybatis.DaoSupportImpl.*(..)) or execution(* com.*.*.*.ds.impl.*.*(..))" />
+			<aop:around method="traceLog" pointcut-ref="TRACELOG_DS_POINTCUT" />
+		</aop:aspect>
+	</aop:config>
+	<!-- 
+	<bean class="com.dap.core.config.ConfigurationLoader">
+		<property name="locations">
+			<list>
+				<value>configsvr:config/application.properties</value>
+				<value>configsvr:config/system.properties</value>
+			</list>
+		</property>
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+		日志级别动态调整
+	<bean id="logbackDynamicConfigurator" class="com.dap.log.LogbackDynamicConfigurator" />
+	<dubbo:service interface="com.dap.log.DynamicConfigurator" ref="logbackDynamicConfigurator" loadbalance="SpecialLoadBalance" /> -->
+</beans>
+

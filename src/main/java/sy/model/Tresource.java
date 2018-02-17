@@ -1,27 +1,11 @@
 package sy.model;
 
+import com.dap.dao.BasePo;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
-@Entity
-@Table(name = "tresource")
-@DynamicInsert(true)
-@DynamicUpdate(true)
-public class Tresource implements java.io.Serializable {
+public class Tresource extends BasePo{
 
 	private String id;
 	private Tresourcetype tresourcetype;
@@ -56,8 +40,6 @@ public class Tresource implements java.io.Serializable {
 		this.tresources = tresources;
 	}
 
-	@Id
-	@Column(name = "ID", nullable = false, length = 36)
 	public String getId() {
 		return this.id;
 	}
@@ -66,8 +48,6 @@ public class Tresource implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TRESOURCETYPE_ID", nullable = false)
 	public Tresourcetype getTresourcetype() {
 		return this.tresourcetype;
 	}
@@ -76,8 +56,6 @@ public class Tresource implements java.io.Serializable {
 		this.tresourcetype = tresourcetype;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PID")
 	public Tresource getTresource() {
 		return this.tresource;
 	}
@@ -86,7 +64,6 @@ public class Tresource implements java.io.Serializable {
 		this.tresource = tresource;
 	}
 
-	@Column(name = "NAME", nullable = false, length = 100)
 	public String getName() {
 		return this.name;
 	}
@@ -95,7 +72,6 @@ public class Tresource implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "REMARK", length = 200)
 	public String getRemark() {
 		return this.remark;
 	}
@@ -104,7 +80,6 @@ public class Tresource implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	@Column(name = "SEQ")
 	public Integer getSeq() {
 		return this.seq;
 	}
@@ -113,7 +88,6 @@ public class Tresource implements java.io.Serializable {
 		this.seq = seq;
 	}
 
-	@Column(name = "URL", length = 200)
 	public String getUrl() {
 		return this.url;
 	}
@@ -122,7 +96,6 @@ public class Tresource implements java.io.Serializable {
 		this.url = url;
 	}
 
-	@Column(name = "ICON", length = 100)
 	public String getIcon() {
 		return this.icon;
 	}
@@ -131,8 +104,6 @@ public class Tresource implements java.io.Serializable {
 		this.icon = icon;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "trole_tresource", joinColumns = { @JoinColumn(name = "TRESOURCE_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "TROLE_ID", nullable = false, updatable = false) })
 	public Set<Trole> getTroles() {
 		return this.troles;
 	}
@@ -141,7 +112,6 @@ public class Tresource implements java.io.Serializable {
 		this.troles = troles;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tresource")
 	public Set<Tresource> getTresources() {
 		return this.tresources;
 	}

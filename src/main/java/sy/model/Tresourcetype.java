@@ -1,23 +1,11 @@
 package sy.model;
 
+import com.dap.dao.BasePo;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
-@Entity
-@Table(name = "tresourcetype")
-@DynamicInsert(true)
-@DynamicUpdate(true)
-public class Tresourcetype implements java.io.Serializable {
+public class Tresourcetype extends BasePo{
 
 	private String id;
 	private String name;
@@ -37,8 +25,6 @@ public class Tresourcetype implements java.io.Serializable {
 		this.tresources = tresources;
 	}
 
-	@Id
-	@Column(name = "ID", nullable = false, length = 36)
 	public String getId() {
 		return this.id;
 	}
@@ -47,7 +33,6 @@ public class Tresourcetype implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "NAME", nullable = false, length = 100)
 	public String getName() {
 		return this.name;
 	}
@@ -56,7 +41,6 @@ public class Tresourcetype implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tresourcetype")
 	public Set<Tresource> getTresources() {
 		return this.tresources;
 	}

@@ -2,7 +2,7 @@ package liutf.junitTest;
 
 import org.junit.Test;
 
-import javax.persistence.Access;
+//import javax.persistence.Access;
 
 /**
  * Created by liutengfei on 15/11/26.

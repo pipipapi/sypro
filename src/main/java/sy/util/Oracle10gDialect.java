@@ -1,3 +1,4 @@
+/*
 package sy.util;
 
 import org.hibernate.dialect.Oracle9iDialect;
@@ -6,6 +7,7 @@ import org.hibernate.sql.ANSIJoinFragment;
 import org.hibernate.sql.JoinFragment;
 import org.hibernate.type.StandardBasicTypes;
 
+*/
 /**
  * 修复BUG
  * 
@@ -13,7 +15,8 @@ import org.hibernate.type.StandardBasicTypes;
  * 
  * @author 孙宇
  * 
- */
+ *//*
+
 public class Oracle10gDialect extends Oracle9iDialect {
 
 	public Oracle10gDialect() {
@@ -28,3 +31,4 @@ public class Oracle10gDialect extends Oracle9iDialect {
 	}
 
 }
+*/
