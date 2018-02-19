@@ -12,26 +12,26 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>4.3.8.RELEASE</version>
 		</dependency>
 		<!-- 加入orm依赖包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>4.3.8.RELEASE</version>
 		</dependency>
 		<!-- 加入spring测试依赖包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>4.3.8.RELEASE</version>
 		</dependency>
 
 		<!-- ehcache需要的依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>4.3.8.RELEASE</version>
 		</dependency>
 		<!-- 加入ehcache -->
 		<dependency>
@@ -166,7 +166,7 @@
 		 <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jms</artifactId>
-            <version>3.2.3.RELEASE</version>
+            <version>4.3.8.RELEASE</version>
         </dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -197,11 +197,17 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.14</version>
 		</dependency>
-
+<!--
 		<dependency>
 			<groupId>com.biyao</groupId>
 			<artifactId>api_common</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/antlr/antlr -->
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
 		</dependency>
 
 		<!-- 引入Google的protostuff依赖,自定义对象的序列化-->
