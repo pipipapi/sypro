@@ -3,16 +3,16 @@
  * distributed with this file and available online at
  * http://expo.ofweek.com/
  */
-package sy.model;
+package sy.model.po;
 
 import com.dap.dao.BasePo;
 import java.util.Date;
 
 
 /**
- * tuser 
+ * tbug 
  */
-public class TuserPo extends BasePo {
+public class TbugPo extends BasePo {
 	private static final long serialVersionUID = -1L;
 	
 	/**
@@ -33,7 +33,12 @@ public class TuserPo extends BasePo {
 	/**
 	 * 
 	 */
-	private String pwd;
+	private String note;
+	
+	/**
+	 * 
+	 */
+	private String bugtypeId;
 	
     
 	public void setCreatedatetime(Date value) {
@@ -63,12 +68,21 @@ public class TuserPo extends BasePo {
 	}
 	
     
-	public void setPwd(String value) {
-		this.pwd = value;
+	public void setNote(String value) {
+		this.note = value;
 	}
 	
-	public String getPwd() {
-		return this.pwd;
+	public String getNote() {
+		return this.note;
+	}
+	
+    
+	public void setBugtypeId(String value) {
+		this.bugtypeId = value;
+	}
+	
+	public String getBugtypeId() {
+		return this.bugtypeId;
 	}
 	
 }

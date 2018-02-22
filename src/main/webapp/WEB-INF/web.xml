@@ -13,7 +13,6 @@
 			classpath:spring-druid.xml,
 			classpath:spring-tasks.xml,
 			classpath:service/ds/sample-datasource.xml
-
 		</param-value>
 	</context-param>
 

@@ -3,7 +3,7 @@
  * distributed with this file and available online at
  * http://expo.ofweek.com/
  */
-package sy.model;
+package sy.model.po;
 
 import com.dap.dao.BasePo;
 import java.util.Date;
@@ -14,7 +14,9 @@ import java.util.Date;
  */
 public class TresourcePo extends BasePo {
 	private static final long serialVersionUID = -1L;
-	
+
+	private String id;
+
 	/**
 	 * 
 	 */
@@ -112,5 +114,12 @@ public class TresourcePo extends BasePo {
 	public String getTresourcetypeId() {
 		return this.tresourcetypeId;
 	}
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

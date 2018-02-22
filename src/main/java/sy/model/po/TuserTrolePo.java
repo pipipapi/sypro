@@ -3,7 +3,7 @@
  * distributed with this file and available online at
  * http://expo.ofweek.com/
  */
-package sy.model;
+package sy.model.po;
 
 import com.dap.dao.BasePo;
 import java.util.Date;

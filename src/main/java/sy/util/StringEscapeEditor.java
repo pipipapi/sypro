@@ -1,4 +1,4 @@
-/*
+
 package sy.util;
 
 import java.beans.PropertyEditorSupport;
@@ -6,7 +6,7 @@ import java.beans.PropertyEditorSupport;
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.JavaScriptUtils;
 
-*/
+
 /**
  * 与spring mvc的@InitBinder结合
  * 
@@ -14,7 +14,7 @@ import org.springframework.web.util.JavaScriptUtils;
  * 
  * @author 孙宇
  * 
- *//*
+ */
 
 public class StringEscapeEditor extends PropertyEditorSupport {
 
@@ -54,4 +54,4 @@ public class StringEscapeEditor extends PropertyEditorSupport {
 	}
 
 }
-*/
+

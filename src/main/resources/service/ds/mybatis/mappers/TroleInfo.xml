@@ -4,9 +4,9 @@
 
 <!-- trole -->
 
-<mapper namespace="sy.model.TrolePo">
+<mapper namespace="sy.model.po.TrolePo">
 
-	<resultMap id="BaseResultMap" type="sy.model.TrolePo">
+	<resultMap id="BaseResultMap" type="sy.model.po.TrolePo">
 		<result property="id" column="ID" jdbcType="VARCHAR"/>
 		<result property="name" column="NAME" jdbcType="VARCHAR"/>
 		<result property="remark" column="REMARK" jdbcType="VARCHAR"/>
@@ -87,7 +87,7 @@
 	    </if>
 	  </sql>
 	  
-	 <select id="queryListByBean" resultMap="BaseResultMap" parameterType="sy.model.po.bean.TroleBean" >
+	 <select id="queryListByBean" resultMap="BaseResultMap" parameterType="sy.model.bean.TroleBean" >
 	    <!--
 	      WARNING - 根据Criteria所携带条件查询数据，不含Blob字段。
 	    -->
@@ -103,7 +103,7 @@
 	    </if>
 	  </select>
 	   
-	<select id="countByBean" parameterType="sy.model.po.bean.TroleBean"
+	<select id="countByBean" parameterType="sy.model.bean.TroleBean"
 		resultType="java.lang.Integer">
 		select count(*) from 
 		<include refid="Table_Name" />
@@ -112,7 +112,7 @@
 		</if>
 	</select>
 
-	<delete id="deleteByBean" parameterType="sy.model.po.bean.TroleBean">
+	<delete id="deleteByBean" parameterType="sy.model.bean.TroleBean">
 		delete from 
 		<include refid="Table_Name" />
 		<if test="_parameter != null">

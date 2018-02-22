@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- tuser_trole -->
+
+<mapper namespace="sy.model.po.TuserPo">
+
+    <select id="countBetweenMonths" parameterType="java.util.Map">
+        select count(*) from Tuser t where HOUR(t.createdatetime)
+        <![CDATA[ >= ]]>
+        #{start} and HOUR(t.createdatetime)
+        <![CDATA[ < ]]>
+        #{end}
+    </select>
+
+    <select id="selectOneBringRole">
+        SELECT from Tuser t join t.troles role join fetch role.tresources resource
+        where t.id = #{id}
+    </select>
+
+</mapper>

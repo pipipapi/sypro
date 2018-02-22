@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<bean class="com.dap.core.config.ConfigurationLoader">
-		<property name="locations">
-			<list>
-				<value>application.properties</value>
-			</list>
-		</property>
-		<property name="order" value="1" />
-		<property name="ignoreUnresolvablePlaceholders" value="true" />
-	</bean>
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
         init-method="init" destroy-method="close">
@@ -62,7 +54,7 @@
 	<tx:annotation-driven transaction-manager="AMQHRTransactionManager" order="2" />
 
 	<!-- mybatis session 工厂类  -->
-	<bean id="SQLSESSION_FACTORY" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:service/ds/mybatis/mybatis-config.xml" /> 
 		<property name="mapperLocations">
@@ -76,10 +68,11 @@
 	</bean>
 	
 	<!-- 数据访问对象 -->
-	<bean id="DAO_SUPPORT" class="com.dap.dao.mybatis.DaoSupportImpl" init-method="initPropertyColumnMapper">
-		<property name="sqlSessionFactory" ref="SQLSESSION_FACTORY" />
+
+	<bean id="daoSupport" class="com.dap.dao.mybatis.DaoSupportImpl" init-method="initPropertyColumnMapper">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean id="daoService" class="sy.dao.impl.BaseDaoServiceImpl" parent="DAO_SUPPORT" />
+	<bean id="daoService" class="sy.dao.impl.BaseDaoServiceImpl" parent="daoSupport" />
 
 	<!--
 	<aop:config>
@@ -98,9 +91,13 @@
 	</aop:config>
 	-->
 
+	<!--
 	<bean id="logbackDynamicConfigurator" class="com.dap.log.LogbackDynamicConfigurator" />
-	<!--<dubbo:service interface="com.dap.log.DynamicConfigurator"
+	<dubbo:service interface="com.dap.log.DynamicConfigurator"
 	ref="logbackDynamicConfigurator" loadbalance="SpecialLoadBalance" /> -->
+
+	<!-- 自动扫描dao和service包(自动注入) -->
+	<context:component-scan base-package="sy.dao" />
 
 </beans>
 

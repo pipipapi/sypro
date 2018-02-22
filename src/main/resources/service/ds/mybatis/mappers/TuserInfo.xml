@@ -4,9 +4,9 @@
 
 <!-- tuser -->
 
-<mapper namespace="sy.model.TuserPo">
+<mapper namespace="sy.model.po.TuserPo">
 
-	<resultMap id="BaseResultMap" type="sy.model.TuserPo">
+	<resultMap id="BaseResultMap" type="sy.model.po.TuserPo">
 		<result property="id" column="ID" jdbcType="VARCHAR"/>
 		<result property="createdatetime" column="CREATEDATETIME" jdbcType="TIMESTAMP"/>
 		<result property="modifydatetime" column="MODIFYDATETIME" jdbcType="TIMESTAMP"/>
@@ -87,7 +87,7 @@
 	    </if>
 	  </sql>
 	  
-	 <select id="queryListByBean" resultMap="BaseResultMap" parameterType="sy.model.po.bean.TuserBean" >
+	 <select id="queryListByBean" resultMap="BaseResultMap" parameterType="sy.model.bean.TuserBean" >
 	    <!--
 	      WARNING - 根据Criteria所携带条件查询数据，不含Blob字段。
 	    -->
@@ -103,7 +103,7 @@
 	    </if>
 	  </select>
 	   
-	<select id="countByBean" parameterType="sy.model.po.bean.TuserBean"
+	<select id="countByBean" parameterType="sy.model.bean.TuserBean"
 		resultType="java.lang.Integer">
 		select count(*) from 
 		<include refid="Table_Name" />
@@ -112,7 +112,7 @@
 		</if>
 	</select>
 
-	<delete id="deleteByBean" parameterType="sy.model.po.bean.TuserBean">
+	<delete id="deleteByBean" parameterType="sy.model.bean.TuserBean">
 		delete from 
 		<include refid="Table_Name" />
 		<if test="_parameter != null">

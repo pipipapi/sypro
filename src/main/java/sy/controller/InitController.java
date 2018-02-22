@@ -1,26 +1,21 @@
-/*
 
 package sy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import sy.dao.IDaoService;
 import sy.dao.impl.ResourceDaoImpl;
 import sy.dao.impl.ResourceTypeDaoImpl;
 import sy.dao.impl.RoleDaoImpl;
 import sy.dao.impl.UserDaoImpl;
-import sy.model.Tresource;
-import sy.model.Tresourcetype;
 
 import javax.servlet.http.HttpSession;
 
-*/
 /**
  * 初始化数据库控制器
  * 
  * @author 孙宇
- *//*
+ */
 
 
 @Controller
@@ -28,24 +23,23 @@ import javax.servlet.http.HttpSession;
 public class InitController {
 
 	@Autowired
-	private UserDaoImpl userDao;
+	private UserDaoImpl userDaoImpl;
 
 	@Autowired
-	private RoleDaoImpl roleDao;
+	private RoleDaoImpl roleDaoImpl;
 
 	@Autowired
-	private ResourceDaoImpl resourceDao;
+	private ResourceDaoImpl resourceDaoImpl;
 
 	@Autowired
-	private ResourceTypeDaoImpl resourceTypeDao;
+	private ResourceTypeDaoImpl resourceTypeDaoImpl;
 
 
-	*/
-/**
+	/*
 	 * 初始化数据库后转向到首页
 	 * 
 	 * @return
-	 *//*
+	 */
 
 
 	@RequestMapping("/init")
@@ -63,7 +57,7 @@ public class InitController {
 
 		initResourceType();// 初始化资源类型
 
-		initResource();// 初始化资源
+		iniTresourcePo();// 初始化资源
 
 		initRole();// 初始化角色
 
@@ -72,11 +66,12 @@ public class InitController {
 	}
 
 
-	private void initResource() {
-		Tresourcetype menuType = resourceTypeDao.get(Tresourcetype.class, "0");// 菜单类型
-		Tresourcetype funType = resourceTypeDao.get(Tresourcetype.class, "1");// 功能类型
+	private void iniTresourcePo() {
+		/****
+		TresourcetypePo menuType = resourceTypeDao.get(Tresourcetype.class, "0");// 菜单类型
+		TresourcetypePo funType = resourceTypeDao.get(Tresourcetype.class, "1");// 功能类型
 
-		Tresource xtgl = new Tresource();
+		TresourcePo xtgl = new TresourcePo();
 		xtgl.setId("xtgl");
 		xtgl.setName("系统管理");
 		xtgl.setTresourcetype(menuType);
@@ -84,419 +79,419 @@ public class InitController {
 		xtgl.setIcon("plugin");
 		resourceDao.saveOrUpdate(xtgl);
 
-		Tresource zygl = new Tresource();
+		TresourcePo zygl = new TresourcePo();
 		zygl.setId("zygl");
 		zygl.setName("资源管理");
 		zygl.setTresourcetype(menuType);
-		zygl.setTresource(xtgl);
+		zygl.setTresourcePo(xtgl);
 		zygl.setSeq(1);
 		zygl.setUrl("/resourceController/manager");
 		zygl.setIcon("database_gear");
 		zygl.setRemark("管理系统中所有的菜单或功能");
 		resourceDao.saveOrUpdate(zygl);
 
-		Tresource zyglTreeGrid = new Tresource();
+		TresourcePo zyglTreeGrid = new TresourcePo();
 		zyglTreeGrid.setId("zyglTreeGrid");
 		zyglTreeGrid.setName("资源表格");
 		zyglTreeGrid.setTresourcetype(funType);
-		zyglTreeGrid.setTresource(zygl);
+		zyglTreeGrid.setTresourcePo(zygl);
 		zyglTreeGrid.setSeq(1);
 		zyglTreeGrid.setUrl("/resourceController/treeGrid");
 		zyglTreeGrid.setIcon("wrench");
 		zyglTreeGrid.setRemark("显示资源列表");
 		resourceDao.saveOrUpdate(zyglTreeGrid);
 
-		Tresource zyglMenu = new Tresource();
+		TresourcePo zyglMenu = new TresourcePo();
 		zyglMenu.setId("zyglMenu");
 		zyglMenu.setName("功能菜单");
 		zyglMenu.setTresourcetype(funType);
-		zyglMenu.setTresource(zygl);
+		zyglMenu.setTresourcePo(zygl);
 		zyglMenu.setSeq(2);
 		zyglMenu.setUrl("/resourceController/tree");
 		zyglMenu.setIcon("wrench");
 		resourceDao.saveOrUpdate(zyglMenu);
 
-		Tresource zyglAddPage = new Tresource();
+		TresourcePo zyglAddPage = new TresourcePo();
 		zyglAddPage.setId("zyglAddPage");
 		zyglAddPage.setName("添加资源页面");
 		zyglAddPage.setTresourcetype(funType);
-		zyglAddPage.setTresource(zygl);
+		zyglAddPage.setTresourcePo(zygl);
 		zyglAddPage.setSeq(3);
 		zyglAddPage.setUrl("/resourceController/addPage");
 		zyglAddPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(zyglAddPage);
 
-		Tresource zyglAdd = new Tresource();
+		TresourcePo zyglAdd = new TresourcePo();
 		zyglAdd.setId("zyglAdd");
 		zyglAdd.setName("添加资源");
 		zyglAdd.setTresourcetype(funType);
-		zyglAdd.setTresource(zygl);
+		zyglAdd.setTresourcePo(zygl);
 		zyglAdd.setSeq(4);
 		zyglAdd.setUrl("/resourceController/add");
 		zyglAdd.setIcon("wrench");
 		resourceDao.saveOrUpdate(zyglAdd);
 
-		Tresource zyglEditPage = new Tresource();
+		TresourcePo zyglEditPage = new TresourcePo();
 		zyglEditPage.setId("zyglEditPage");
 		zyglEditPage.setName("编辑资源页面");
 		zyglEditPage.setTresourcetype(funType);
-		zyglEditPage.setTresource(zygl);
+		zyglEditPage.setTresourcePo(zygl);
 		zyglEditPage.setSeq(5);
 		zyglEditPage.setUrl("/resourceController/editPage");
 		zyglEditPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(zyglEditPage);
 
-		Tresource zyglEdit = new Tresource();
+		TresourcePo zyglEdit = new TresourcePo();
 		zyglEdit.setId("zyglEdit");
 		zyglEdit.setName("编辑资源");
 		zyglEdit.setTresourcetype(funType);
-		zyglEdit.setTresource(zygl);
+		zyglEdit.setTresourcePo(zygl);
 		zyglEdit.setSeq(6);
 		zyglEdit.setUrl("/resourceController/edit");
 		zyglEdit.setIcon("wrench");
 		resourceDao.saveOrUpdate(zyglEdit);
 
-		Tresource zyglDelete = new Tresource();
+		TresourcePo zyglDelete = new TresourcePo();
 		zyglDelete.setId("zyglDelete");
 		zyglDelete.setName("删除资源");
 		zyglDelete.setTresourcetype(funType);
-		zyglDelete.setTresource(zygl);
+		zyglDelete.setTresourcePo(zygl);
 		zyglDelete.setSeq(7);
 		zyglDelete.setUrl("/resourceController/delete");
 		zyglDelete.setIcon("wrench");
 		resourceDao.saveOrUpdate(zyglDelete);
 
-		Tresource jsgl = new Tresource();
+		TresourcePo jsgl = new TresourcePo();
 		jsgl.setId("jsgl");
 		jsgl.setName("角色管理");
 		jsgl.setTresourcetype(menuType);
-		jsgl.setTresource(xtgl);
+		jsgl.setTresourcePo(xtgl);
 		jsgl.setSeq(2);
 		jsgl.setUrl("/roleController/manager");
 		jsgl.setIcon("tux");
 		resourceDao.saveOrUpdate(jsgl);
 
-		Tresource jsglTreeGrid = new Tresource();
+		TresourcePo jsglTreeGrid = new TresourcePo();
 		jsglTreeGrid.setId("jsglTreeGrid");
 		jsglTreeGrid.setName("角色表格");
 		jsglTreeGrid.setTresourcetype(funType);
-		jsglTreeGrid.setTresource(jsgl);
+		jsglTreeGrid.setTresourcePo(jsgl);
 		jsglTreeGrid.setSeq(1);
 		jsglTreeGrid.setUrl("/roleController/treeGrid");
 		jsglTreeGrid.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglTreeGrid);
 
-		Tresource jsglAddPage = new Tresource();
+		TresourcePo jsglAddPage = new TresourcePo();
 		jsglAddPage.setId("jsglAddPage");
 		jsglAddPage.setName("添加角色页面");
 		jsglAddPage.setTresourcetype(funType);
-		jsglAddPage.setTresource(jsgl);
+		jsglAddPage.setTresourcePo(jsgl);
 		jsglAddPage.setSeq(2);
 		jsglAddPage.setUrl("/roleController/addPage");
 		jsglAddPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglAddPage);
 
-		Tresource jsglAdd = new Tresource();
+		TresourcePo jsglAdd = new TresourcePo();
 		jsglAdd.setId("jsglAdd");
 		jsglAdd.setName("添加角色");
 		jsglAdd.setTresourcetype(funType);
-		jsglAdd.setTresource(jsgl);
+		jsglAdd.setTresourcePo(jsgl);
 		jsglAdd.setSeq(3);
 		jsglAdd.setUrl("/roleController/add");
 		jsglAdd.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglAdd);
 
-		Tresource jsglEditPage = new Tresource();
+		TresourcePo jsglEditPage = new TresourcePo();
 		jsglEditPage.setId("jsglEditPage");
 		jsglEditPage.setName("编辑角色页面");
 		jsglEditPage.setTresourcetype(funType);
-		jsglEditPage.setTresource(jsgl);
+		jsglEditPage.setTresourcePo(jsgl);
 		jsglEditPage.setSeq(4);
 		jsglEditPage.setUrl("/roleController/editPage");
 		jsglEditPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglEditPage);
 
-		Tresource jsglEdit = new Tresource();
+		TresourcePo jsglEdit = new TresourcePo();
 		jsglEdit.setId("jsglEdit");
 		jsglEdit.setName("编辑角色");
 		jsglEdit.setTresourcetype(funType);
-		jsglEdit.setTresource(jsgl);
+		jsglEdit.setTresourcePo(jsgl);
 		jsglEdit.setSeq(5);
 		jsglEdit.setUrl("/roleController/edit");
 		jsglEdit.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglEdit);
 
-		Tresource jsglDelete = new Tresource();
+		TresourcePo jsglDelete = new TresourcePo();
 		jsglDelete.setId("jsglDelete");
 		jsglDelete.setName("删除角色");
 		jsglDelete.setTresourcetype(funType);
-		jsglDelete.setTresource(jsgl);
+		jsglDelete.setTresourcePo(jsgl);
 		jsglDelete.setSeq(6);
 		jsglDelete.setUrl("/roleController/delete");
 		jsglDelete.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglDelete);
 
-		Tresource jsglGrantPage = new Tresource();
+		TresourcePo jsglGrantPage = new TresourcePo();
 		jsglGrantPage.setId("jsglGrantPage");
 		jsglGrantPage.setName("角色授权页面");
 		jsglGrantPage.setTresourcetype(funType);
-		jsglGrantPage.setTresource(jsgl);
+		jsglGrantPage.setTresourcePo(jsgl);
 		jsglGrantPage.setSeq(7);
 		jsglGrantPage.setUrl("/roleController/grantPage");
 		jsglGrantPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglGrantPage);
 
-		Tresource jsglGrant = new Tresource();
+		TresourcePo jsglGrant = new TresourcePo();
 		jsglGrant.setId("jsglGrant");
 		jsglGrant.setName("角色授权");
 		jsglGrant.setTresourcetype(funType);
-		jsglGrant.setTresource(jsgl);
+		jsglGrant.setTresourcePo(jsgl);
 		jsglGrant.setSeq(8);
 		jsglGrant.setUrl("/roleController/grant");
 		jsglGrant.setIcon("wrench");
 		resourceDao.saveOrUpdate(jsglGrant);
 
-		Tresource yhgl = new Tresource();
+		TresourcePo yhgl = new TresourcePo();
 		yhgl.setId("yhgl");
 		yhgl.setName("用户管理");
 		yhgl.setTresourcetype(menuType);
-		yhgl.setTresource(xtgl);
+		yhgl.setTresourcePo(xtgl);
 		yhgl.setSeq(3);
 		yhgl.setUrl("/userController/manager");
 		yhgl.setIcon("status_online");
 		resourceDao.saveOrUpdate(yhgl);
 
-		Tresource yhglDateGrid = new Tresource();
+		TresourcePo yhglDateGrid = new TresourcePo();
 		yhglDateGrid.setId("yhglDateGrid");
 		yhglDateGrid.setName("用户表格");
 		yhglDateGrid.setTresourcetype(funType);
-		yhglDateGrid.setTresource(yhgl);
+		yhglDateGrid.setTresourcePo(yhgl);
 		yhglDateGrid.setSeq(1);
 		yhglDateGrid.setUrl("/userController/dataGrid");
 		yhglDateGrid.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglDateGrid);
 
-		Tresource yhglAddPage = new Tresource();
+		TresourcePo yhglAddPage = new TresourcePo();
 		yhglAddPage.setId("yhglAddPage");
 		yhglAddPage.setName("添加用户页面");
 		yhglAddPage.setTresourcetype(funType);
-		yhglAddPage.setTresource(yhgl);
+		yhglAddPage.setTresourcePo(yhgl);
 		yhglAddPage.setSeq(2);
 		yhglAddPage.setUrl("/userController/addPage");
 		yhglAddPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglAddPage);
 
-		Tresource yhglAdd = new Tresource();
+		TresourcePo yhglAdd = new TresourcePo();
 		yhglAdd.setId("yhglAdd");
 		yhglAdd.setName("添加用户");
 		yhglAdd.setTresourcetype(funType);
-		yhglAdd.setTresource(yhgl);
+		yhglAdd.setTresourcePo(yhgl);
 		yhglAdd.setSeq(3);
 		yhglAdd.setUrl("/userController/add");
 		yhglAdd.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglAdd);
 
-		Tresource yhglEditPage = new Tresource();
+		TresourcePo yhglEditPage = new TresourcePo();
 		yhglEditPage.setId("yhglEditPage");
 		yhglEditPage.setName("编辑用户页面");
 		yhglEditPage.setTresourcetype(funType);
-		yhglEditPage.setTresource(yhgl);
+		yhglEditPage.setTresourcePo(yhgl);
 		yhglEditPage.setSeq(4);
 		yhglEditPage.setUrl("/userController/editPage");
 		yhglEditPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglEditPage);
 
-		Tresource yhglEdit = new Tresource();
+		TresourcePo yhglEdit = new TresourcePo();
 		yhglEdit.setId("yhglEdit");
 		yhglEdit.setName("编辑用户");
 		yhglEdit.setTresourcetype(funType);
-		yhglEdit.setTresource(yhgl);
+		yhglEdit.setTresourcePo(yhgl);
 		yhglEdit.setSeq(5);
 		yhglEdit.setUrl("/userController/edit");
 		yhglEdit.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglEdit);
 
-		Tresource yhglDelete = new Tresource();
+		TresourcePo yhglDelete = new TresourcePo();
 		yhglDelete.setId("yhglDelete");
 		yhglDelete.setName("删除用户");
 		yhglDelete.setTresourcetype(funType);
-		yhglDelete.setTresource(yhgl);
+		yhglDelete.setTresourcePo(yhgl);
 		yhglDelete.setSeq(6);
 		yhglDelete.setUrl("/userController/delete");
 		yhglDelete.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglDelete);
 
-		Tresource yhglBatchDelete = new Tresource();
+		TresourcePo yhglBatchDelete = new TresourcePo();
 		yhglBatchDelete.setId("yhglBatchDelete");
 		yhglBatchDelete.setName("批量删除用户");
 		yhglBatchDelete.setTresourcetype(funType);
-		yhglBatchDelete.setTresource(yhgl);
+		yhglBatchDelete.setTresourcePo(yhgl);
 		yhglBatchDelete.setSeq(7);
 		yhglBatchDelete.setUrl("/userController/batchDelete");
 		yhglBatchDelete.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglBatchDelete);
 
-		Tresource yhglGrantPage = new Tresource();
+		TresourcePo yhglGrantPage = new TresourcePo();
 		yhglGrantPage.setId("yhglGrantPage");
 		yhglGrantPage.setName("用户授权页面");
 		yhglGrantPage.setTresourcetype(funType);
-		yhglGrantPage.setTresource(yhgl);
+		yhglGrantPage.setTresourcePo(yhgl);
 		yhglGrantPage.setSeq(8);
 		yhglGrantPage.setUrl("/userController/grantPage");
 		yhglGrantPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglGrantPage);
 
-		Tresource yhglGrant = new Tresource();
+		TresourcePo yhglGrant = new TresourcePo();
 		yhglGrant.setId("yhglGrant");
 		yhglGrant.setName("用户授权");
 		yhglGrant.setTresourcetype(funType);
-		yhglGrant.setTresource(yhgl);
+		yhglGrant.setTresourcePo(yhgl);
 		yhglGrant.setSeq(9);
 		yhglGrant.setUrl("/userController/grant");
 		yhglGrant.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglGrant);
 
-		Tresource yhglEditPwdPage = new Tresource();
+		TresourcePo yhglEditPwdPage = new TresourcePo();
 		yhglEditPwdPage.setId("yhglEditPwdPage");
 		yhglEditPwdPage.setName("用户修改密码页面");
 		yhglEditPwdPage.setTresourcetype(funType);
-		yhglEditPwdPage.setTresource(yhgl);
+		yhglEditPwdPage.setTresourcePo(yhgl);
 		yhglEditPwdPage.setSeq(10);
 		yhglEditPwdPage.setUrl("/userController/editPwdPage");
 		yhglEditPwdPage.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglEditPwdPage);
 
-		Tresource yhglEditPwd = new Tresource();
+		TresourcePo yhglEditPwd = new TresourcePo();
 		yhglEditPwd.setId("yhglEditPwd");
 		yhglEditPwd.setName("用户修改密码");
 		yhglEditPwd.setTresourcetype(funType);
-		yhglEditPwd.setTresource(yhgl);
+		yhglEditPwd.setTresourcePo(yhgl);
 		yhglEditPwd.setSeq(11);
 		yhglEditPwd.setUrl("/userController/editPwd");
 		yhglEditPwd.setIcon("wrench");
 		resourceDao.saveOrUpdate(yhglEditPwd);
 
-		Tresource buggl = new Tresource();
+		TresourcePo buggl = new TresourcePo();
 		buggl.setId("buggl");
 		buggl.setName("BUG管理");
 		buggl.setTresourcetype(menuType);
-		buggl.setTresource(xtgl);
+		buggl.setTresourcePo(xtgl);
 		buggl.setSeq(4);
 		buggl.setUrl("/bugController/manager");
 		buggl.setIcon("bug");
 		resourceDao.saveOrUpdate(buggl);
 
-		Tresource bugglDateGrid = new Tresource();
+		TresourcePo bugglDateGrid = new TresourcePo();
 		bugglDateGrid.setId("bugglDateGrid");
 		bugglDateGrid.setName("BUG表格");
 		bugglDateGrid.setTresourcetype(funType);
-		bugglDateGrid.setTresource(buggl);
+		bugglDateGrid.setTresourcePo(buggl);
 		bugglDateGrid.setSeq(1);
 		bugglDateGrid.setUrl("/bugController/dataGrid");
 		bugglDateGrid.setIcon("bug_link");
 		resourceDao.saveOrUpdate(bugglDateGrid);
 
-		Tresource bugglAddPage = new Tresource();
+		TresourcePo bugglAddPage = new TresourcePo();
 		bugglAddPage.setId("bugglAddPage");
 		bugglAddPage.setName("添加BUG页面");
 		bugglAddPage.setTresourcetype(funType);
-		bugglAddPage.setTresource(buggl);
+		bugglAddPage.setTresourcePo(buggl);
 		bugglAddPage.setSeq(2);
 		bugglAddPage.setUrl("/bugController/addPage");
 		bugglAddPage.setIcon("bug_add");
 		resourceDao.saveOrUpdate(bugglAddPage);
 
-		Tresource bugglAdd = new Tresource();
+		TresourcePo bugglAdd = new TresourcePo();
 		bugglAdd.setId("bugglAdd");
 		bugglAdd.setName("添加BUG");
 		bugglAdd.setTresourcetype(funType);
-		bugglAdd.setTresource(buggl);
+		bugglAdd.setTresourcePo(buggl);
 		bugglAdd.setSeq(3);
 		bugglAdd.setUrl("/bugController/add");
 		bugglAdd.setIcon("bug_add");
 		resourceDao.saveOrUpdate(bugglAdd);
 
-		Tresource bugglEditPage = new Tresource();
+		TresourcePo bugglEditPage = new TresourcePo();
 		bugglEditPage.setId("bugglEditPage");
 		bugglEditPage.setName("编辑BUG页面");
 		bugglEditPage.setTresourcetype(funType);
-		bugglEditPage.setTresource(buggl);
+		bugglEditPage.setTresourcePo(buggl);
 		bugglEditPage.setSeq(4);
 		bugglEditPage.setUrl("/bugController/editPage");
 		bugglEditPage.setIcon("bug_edit");
 		resourceDao.saveOrUpdate(bugglEditPage);
 
-		Tresource bugglEdit = new Tresource();
+		TresourcePo bugglEdit = new TresourcePo();
 		bugglEdit.setId("bugglEdit");
 		bugglEdit.setName("编辑BUG");
 		bugglEdit.setTresourcetype(funType);
-		bugglEdit.setTresource(buggl);
+		bugglEdit.setTresourcePo(buggl);
 		bugglEdit.setSeq(5);
 		bugglEdit.setUrl("/bugController/edit");
 		bugglEdit.setIcon("bug_edit");
 		resourceDao.saveOrUpdate(bugglEdit);
 
-		Tresource bugglDelete = new Tresource();
+		TresourcePo bugglDelete = new TresourcePo();
 		bugglDelete.setId("bugglDelete");
 		bugglDelete.setName("删除BUG");
 		bugglDelete.setTresourcetype(funType);
-		bugglDelete.setTresource(buggl);
+		bugglDelete.setTresourcePo(buggl);
 		bugglDelete.setSeq(6);
 		bugglDelete.setUrl("/bugController/delete");
 		bugglDelete.setIcon("bug_delete");
 		resourceDao.saveOrUpdate(bugglDelete);
 
-		Tresource bugglView = new Tresource();
+		TresourcePo bugglView = new TresourcePo();
 		bugglView.setId("bugglView");
 		bugglView.setName("查看BUG");
 		bugglView.setTresourcetype(funType);
-		bugglView.setTresource(buggl);
+		bugglView.setTresourcePo(buggl);
 		bugglView.setSeq(7);
 		bugglView.setUrl("/bugController/view");
 		bugglView.setIcon("bug_link");
 		resourceDao.saveOrUpdate(bugglView);
 
-		Tresource sjygl = new Tresource();
+		TresourcePo sjygl = new TresourcePo();
 		sjygl.setId("sjygl");
 		sjygl.setName("数据源管理");
 		sjygl.setTresourcetype(menuType);
-		sjygl.setTresource(xtgl);
+		sjygl.setTresourcePo(xtgl);
 		sjygl.setSeq(5);
 		sjygl.setUrl("/druidController/druid");
 		sjygl.setIcon("server_database");
 		resourceDao.saveOrUpdate(sjygl);
 
-		Tresource wjgl = new Tresource();
+		TresourcePo wjgl = new TresourcePo();
 		wjgl.setId("wjgl");
 		wjgl.setName("文件管理");
 		wjgl.setTresourcetype(funType);
-		wjgl.setTresource(xtgl);
+		wjgl.setTresourcePo(xtgl);
 		wjgl.setSeq(6);
 		wjgl.setUrl("");
 		wjgl.setIcon("server_database");
 		resourceDao.saveOrUpdate(wjgl);
 
-		Tresource wjglView = new Tresource();
+		TresourcePo wjglView = new TresourcePo();
 		wjglView.setId("wjglView");
 		wjglView.setName("浏览服务器文件");
 		wjglView.setTresourcetype(funType);
-		wjglView.setTresource(wjgl);
+		wjglView.setTresourcePo(wjgl);
 		wjglView.setSeq(1);
 		wjglView.setUrl("/fileController/fileManage");
 		wjglView.setIcon("server_database");
 		resourceDao.saveOrUpdate(wjglView);
 
-		Tresource wjglUpload = new Tresource();
+		TresourcePo wjglUpload = new TresourcePo();
 		wjglUpload.setId("wjglUpload");
 		wjglUpload.setName("上传文件");
 		wjglUpload.setTresourcetype(funType);
-		wjglUpload.setTresource(wjgl);
+		wjglUpload.setTresourcePo(wjgl);
 		wjglUpload.setSeq(2);
 		wjglUpload.setUrl("/fileController/upload");
 		wjglUpload.setIcon("server_database");
 		resourceDao.saveOrUpdate(wjglUpload);
 
-		Tresource chart = new Tresource();
+		TresourcePo chart = new TresourcePo();
 		chart.setId("chart");
 		chart.setName("图表管理");
 		chart.setTresourcetype(menuType);
@@ -504,17 +499,17 @@ public class InitController {
 		chart.setIcon("chart_bar");
 		resourceDao.saveOrUpdate(chart);
 
-		Tresource userCreateDatetimeChart = new Tresource();
+		TresourcePo userCreateDatetimeChart = new TresourcePo();
 		userCreateDatetimeChart.setId("userCreateDatetimeChart");
 		userCreateDatetimeChart.setName("用户图表");
 		userCreateDatetimeChart.setTresourcetype(menuType);
 		userCreateDatetimeChart.setUrl("/chartController/userCreateDatetimeChart");
 		userCreateDatetimeChart.setSeq(1);
 		userCreateDatetimeChart.setIcon("chart_curve");
-		userCreateDatetimeChart.setTresource(chart);
+		userCreateDatetimeChart.setTresourcePo(chart);
 		resourceDao.saveOrUpdate(userCreateDatetimeChart);
 
-		Tresource jeasyuiApi = new Tresource();
+		TresourcePo jeasyuiApi = new TresourcePo();
 		jeasyuiApi.setId("jeasyuiApi");
 		jeasyuiApi.setName("EasyUI API");
 		jeasyuiApi.setTresourcetype(menuType);
@@ -522,10 +517,12 @@ public class InitController {
 		jeasyuiApi.setSeq(1000);
 		jeasyuiApi.setIcon("book");
 		resourceDao.saveOrUpdate(jeasyuiApi);
-
+		**/
 	}
 
 	private void initResourceType() {
+
+		/***
 		Tresourcetype t = new Tresourcetype();
 		t.setId("0");
 		t.setName("菜单");
@@ -535,13 +532,15 @@ public class InitController {
 		t2.setId("1");
 		t2.setName("功能");
 		resourceTypeDao.saveOrUpdate(t2);
+		 ***/
 	}
 
 	private void initRole() {
+		/***
 		Trole superAdmin = new Trole();
 		superAdmin.setId("0");
 		superAdmin.setName("超管");
-		superAdmin.getTresources().addAll(resourceDao.find("from Tresource t"));// 让超管可以访问所有资源
+		superAdmin.getTresources().addAll(resourceDao.find("from TresourcePo t"));// 让超管可以访问所有资源
 		superAdmin.setSeq(0);
 		superAdmin.setRemark("超级管理员角色，拥有系统中所有的资源访问权限");
 		roleDao.saveOrUpdate(superAdmin);
@@ -551,7 +550,7 @@ public class InitController {
 		zyAdmin.setName("资源管理员");
 		zyAdmin.setTrole(superAdmin);// 父级是超管
 		zyAdmin.setSeq(1);
-		zyAdmin.getTresources().addAll(resourceDao.find("from Tresource t where t.tresource.id in ('zygl') or t.id in ('zygl')"));
+		zyAdmin.getTresources().addAll(resourceDao.find("from TresourcePo t where t.tresource.id in ('zygl') or t.id in ('zygl')"));
 		roleDao.saveOrUpdate(zyAdmin);
 
 		Trole jsAdmin = new Trole();
@@ -559,7 +558,7 @@ public class InitController {
 		jsAdmin.setName("角色管理员");
 		jsAdmin.setTrole(superAdmin);// 父级是超管
 		jsAdmin.setSeq(2);
-		jsAdmin.getTresources().addAll(resourceDao.find("from Tresource t where t.tresource.id in ('jsgl') or t.id in ('jsgl')"));
+		jsAdmin.getTresources().addAll(resourceDao.find("from TresourcePo t where t.tresource.id in ('jsgl') or t.id in ('jsgl')"));
 		roleDao.saveOrUpdate(jsAdmin);
 
 		Trole yhAdmin = new Trole();
@@ -567,7 +566,7 @@ public class InitController {
 		yhAdmin.setName("用户管理员");
 		yhAdmin.setTrole(superAdmin);// 父级是超管
 		yhAdmin.setSeq(3);
-		yhAdmin.getTresources().addAll(resourceDao.find("from Tresource t where t.tresource.id in ('yhgl') or t.id in ('yhgl')"));
+		yhAdmin.getTresources().addAll(resourceDao.find("from TresourcePo t where t.tresource.id in ('yhgl') or t.id in ('yhgl')"));
 		roleDao.saveOrUpdate(yhAdmin);
 
 		Trole sjyAdmin = new Trole();
@@ -575,7 +574,7 @@ public class InitController {
 		sjyAdmin.setName("数据源管理员");
 		sjyAdmin.setTrole(superAdmin);// 父级是超管
 		sjyAdmin.setSeq(4);
-		sjyAdmin.getTresources().addAll(resourceDao.find("from Tresource t where t.tresource.id in ('sjygl') or t.id in ('sjygl')"));
+		sjyAdmin.getTresources().addAll(resourceDao.find("from TresourcePo t where t.tresource.id in ('sjygl') or t.id in ('sjygl')"));
 		roleDao.saveOrUpdate(sjyAdmin);
 
 		Trole bugAdmin = new Trole();
@@ -583,19 +582,21 @@ public class InitController {
 		bugAdmin.setName("BUG管理员");
 		bugAdmin.setTrole(superAdmin);// 父级是超管
 		bugAdmin.setSeq(5);
-		bugAdmin.getTresources().addAll(resourceDao.find("from Tresource t where t.tresource.id in ('buggl') or t.id in ('buggl')"));
+		bugAdmin.getTresources().addAll(resourceDao.find("from TresourcePo t where t.tresource.id in ('buggl') or t.id in ('buggl')"));
 		roleDao.saveOrUpdate(bugAdmin);
 
 		Trole guest = new Trole();
 		guest.setId("guest");
 		guest.setName("Guest");
-		guest.getTresources().addAll(resourceDao.find("from Tresource t where t.id in ('xtgl','zygl','zyglTreeGrid','jsgl','jsglTreeGrid','yhgl','yhglDateGrid','jeasyuiApi')"));
+		guest.getTresources().addAll(resourceDao.find("from TresourcePo t where t.id in ('xtgl','zygl','zyglTreeGrid','jsgl','jsglTreeGrid','yhgl','yhglDateGrid','jeasyuiApi')"));
 		guest.setSeq(1);
 		guest.setRemark("只拥有只看的权限");
 		roleDao.saveOrUpdate(guest);
+		 ***/
 	}
 
 	private void initUser() {
+		/***
 		List<Tuser> l = userDao.find("from Tuser t where t.name in ('孙宇','admin1','admin2','admin3','admin4','admin5','guest')");
 		if (l != null && l.size() > 0) {
 			for (Tuser user : l) {
@@ -658,10 +659,10 @@ public class InitController {
 		guest.setCreatedatetime(new Date());
 		guest.getTroles().addAll(roleDao.find("from Trole t where t.id = 'guest'"));// 给用户赋予Guest角色
 		userDao.saveOrUpdate(guest);
+		***/
 	}
 
 
 
 }
 
-*/

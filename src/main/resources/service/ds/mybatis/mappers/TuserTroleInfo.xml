@@ -4,9 +4,9 @@
 
 <!-- tuser_trole -->
 
-<mapper namespace="sy.model.TuserTrolePo">
+<mapper namespace="sy.model.po.TuserTrolePo">
 
-	<resultMap id="BaseResultMap" type="sy.model.TuserTrolePo">
+	<resultMap id="BaseResultMap" type="sy.model.po.TuserTrolePo">
 		<result property="tuserId" column="TUSER_ID" jdbcType="VARCHAR"/>
 		<result property="troleId" column="TROLE_ID" jdbcType="VARCHAR"/>
 	</resultMap>
@@ -84,7 +84,7 @@
 	    </if>
 	  </sql>
 	  
-	 <select id="queryListByBean" resultMap="BaseResultMap" parameterType="sy.model.po.bean.TuserTroleBean" >
+	 <select id="queryListByBean" resultMap="BaseResultMap" parameterType="sy.model.bean.TuserTroleBean" >
 	    <!--
 	      WARNING - 根据Criteria所携带条件查询数据，不含Blob字段。
 	    -->
@@ -100,7 +100,7 @@
 	    </if>
 	  </select>
 	   
-	<select id="countByBean" parameterType="sy.model.po.bean.TuserTroleBean"
+	<select id="countByBean" parameterType="sy.model.bean.TuserTroleBean"
 		resultType="java.lang.Integer">
 		select count(*) from 
 		<include refid="Table_Name" />
@@ -109,7 +109,7 @@
 		</if>
 	</select>
 
-	<delete id="deleteByBean" parameterType="sy.model.po.bean.TuserTroleBean">
+	<delete id="deleteByBean" parameterType="sy.model.bean.TuserTroleBean">
 		delete from 
 		<include refid="Table_Name" />
 		<if test="_parameter != null">

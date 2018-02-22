@@ -1,4 +1,4 @@
-/*
+
 package sy.util;
 
 import java.io.BufferedReader;
@@ -15,24 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-*/
 /**
  * IP工具类
  * 
  * @author 孙宇
  * 
- *//*
+ */
 
 public class IpUtil {
 
-	*/
-/**
+
+	/**
 	 * 获取登录用户的IP地址
 	 * 
 	 * @param request
 	 * @return
-	 *//*
-
+	 */
 	public static String getIpAddr(HttpServletRequest request) {
 		String ip = request.getHeader("x-forwarded-for");
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -53,13 +51,13 @@ public class IpUtil {
 		return getIpInfo(ip);
 	}
 
-	*/
-/**
+
+	/**
 	 * 通过IP获取地址
 	 * 
 	 * @param ip
 	 * @return
-	 *//*
+	 **/
 
 	public static String getIpInfo(String ip) {
 		String info = "";
@@ -99,4 +97,4 @@ public class IpUtil {
 	}
 
 }
-*/
+
