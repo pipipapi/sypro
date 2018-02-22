@@ -4,11 +4,8 @@ import com.dap.dao.BasePo;
 import com.dap.dao.mybatis.DaoSupportImpl;
 import org.springframework.stereotype.Service;
 import sy.dao.IDaoService;
-import sy.model.Tresource;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BaseDaoServiceImpl extends DaoSupportImpl implements IDaoService{

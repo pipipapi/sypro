@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- trole -->
+
+<mapper namespace="sy.model.TrolePo">
+
+	<resultMap id="BaseResultMap" type="sy.model.TrolePo">
+		<result property="id" column="ID" jdbcType="VARCHAR"/>
+		<result property="name" column="NAME" jdbcType="VARCHAR"/>
+		<result property="remark" column="REMARK" jdbcType="VARCHAR"/>
+		<result property="seq" column="SEQ" jdbcType="INTEGER"/>
+		<result property="pid" column="PID" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Table_Name">
+        trole
+    </sql>
+    
+    <sql id="Base_Column">
+        ID,NAME,REMARK,SEQ,PID
+    </sql>
+	
+	
+	<sql id="Example_Where_Clause" >
+	    <!--
+	      WARNING - Criteria条件查询的where语句。
+	      MyBatis代码工具自动生成，不要修改！
+	    -->
+	    <where >
+	      <foreach collection="oredCriteria" item="criteria" >
+	        <if test="criteria.valid" >
+	          <if test="criteria.andRelation" >
+	            and
+	          </if>
+	          <if test="!criteria.andRelation" >
+	            or
+	          </if>
+	          <trim prefix="(" suffix=")" prefixOverrides="and|or" >
+	            <foreach collection="criteria.criteria" item="criterion" >
+	              <choose >
+	                <when test="criterion.noValue and !criterion.orValue" >
+	                  and ${criterion.condition}
+	                </when>
+	                <when test="criterion.noValue and criterion.orValue" >
+	                  or ${criterion.condition}
+	                </when>
+	                <when test="criterion.singleValue and !criterion.orValue" >
+	                  and ${criterion.condition} #{criterion.value}
+	                </when>
+	                <when test="criterion.singleValue and criterion.orValue" >
+	                  or ${criterion.condition} #{criterion.value}
+	                </when>
+	                <when test="criterion.betweenValue and !criterion.orValue" >
+	                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+	                </when>
+	                <when test="criterion.betweenValue and criterion.orValue" >
+	                  or ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+	                </when>
+	                <when test="criterion.listValue and !criterion.orValue" >
+	                  and ${criterion.condition}
+	                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+	                    #{listItem}
+	                  </foreach>
+	                </when>
+	                <when test="criterion.listValue and criterion.orValue" >
+	                  or ${criterion.condition}
+	                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+	                    #{listItem}
+	                  </foreach>
+	                </when>
+	              </choose>
+	            </foreach>
+	          </trim>
+	        </if>
+	      </foreach>
+	    </where>
+	    <if test="orderBy != null and !orderBy.isEmpty()" >
+	      order by 
+		  <foreach collection="orderBy" item="orderByItem" separator=",">
+		  ${orderByItem.columnName}  ${orderByItem.sort}
+		  </foreach>
+	    </if>
+	    <if test="pageIndex != null" >
+	      limit ${(pageIndex-1) * pageSize}, #{pageSize}
+	    </if>
+	  </sql>
+	  
+	 <select id="queryListByBean" resultMap="BaseResultMap" parameterType="sy.model.po.bean.TroleBean" >
+	    <!--
+	      WARNING - 根据Criteria所携带条件查询数据，不含Blob字段。
+	    -->
+	    select
+	    <if test="distinct" >
+	      distinct
+	    </if>
+	    <include refid="Base_Column" />
+	    from
+	    <include refid="Table_Name" />
+	    <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if>
+	  </select>
+	   
+	<select id="countByBean" parameterType="sy.model.po.bean.TroleBean"
+		resultType="java.lang.Integer">
+		select count(*) from 
+		<include refid="Table_Name" />
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+	<delete id="deleteByBean" parameterType="sy.model.po.bean.TroleBean">
+		delete from 
+		<include refid="Table_Name" />
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	
+    <sql id="Base_Where">
+        <trim suffixOverrides="AND">
+	            <if test="id != null">
+	                ID= #{id , jdbcType=VARCHAR}
+	                AND
+	            </if>
+	            <if test="name != null">
+	                NAME= #{name , jdbcType=VARCHAR}
+	                AND
+	            </if>
+	            <if test="remark != null">
+	                REMARK= #{remark , jdbcType=VARCHAR}
+	                AND
+	            </if>
+	            <if test="seq != null">
+	                SEQ= #{seq , jdbcType=INTEGER}
+	                AND
+	            </if>
+	            <if test="pid != null">
+	                PID= #{pid , jdbcType=VARCHAR}
+	                AND
+	            </if>
+            tcc_status = 1
+        </trim>
+    </sql>
+    
+    <sql id="Base_Where_NoStatus">
+        <trim suffixOverrides="AND">
+	            <if test="id != null">
+	                ID= #{id , jdbcType=VARCHAR}
+	                AND
+	            </if>
+	            <if test="name != null">
+	                NAME= #{name , jdbcType=VARCHAR}
+	                AND
+	            </if>
+	            <if test="remark != null">
+	                REMARK= #{remark , jdbcType=VARCHAR}
+	                AND
+	            </if>
+	            <if test="seq != null">
+	                SEQ= #{seq , jdbcType=INTEGER}
+	                AND
+	            </if>
+	            <if test="pid != null">
+	                PID= #{pid , jdbcType=VARCHAR}
+	                AND
+	            </if>
+        </trim>
+    </sql>
+    
+    
+    <sql id="Base_Select">
+        select
+        <include refid="Base_Column" />
+        from
+        <include refid="Table_Name" />
+        <where>
+            <include refid="Base_Where" />
+        </where>
+    </sql>
+    
+    
+    <insert id="insert" parameterType="sy.model.po.TrolePo" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        <include refid="Table_Name" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">
+                    ID,
+                </if>
+                <if test="name != null">
+                    NAME,
+                </if>
+                <if test="remark != null">
+                    REMARK,
+                </if>
+                <if test="seq != null">
+                    SEQ,
+                </if>
+                <if test="pid != null">
+                    PID,
+                </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">
+                    #{id , jdbcType=VARCHAR},
+                </if>
+                <if test="name != null">
+                    #{name , jdbcType=VARCHAR},
+                </if>
+                <if test="remark != null">
+                    #{remark , jdbcType=VARCHAR},
+                </if>
+                <if test="seq != null">
+                    #{seq , jdbcType=INTEGER},
+                </if>
+                <if test="pid != null">
+                    #{pid , jdbcType=VARCHAR},
+                </if>
+        </trim>
+    </insert>
+    
+    
+    <update id="updateByEntity">
+        UPDATE
+        <include refid="Table_Name" />
+        <set>
+                <if test="s.id != null">
+                    ID = #{s.id, jdbcType=VARCHAR},
+                </if>
+                <if test="s.name != null">
+                    NAME = #{s.name, jdbcType=VARCHAR},
+                </if>
+                <if test="s.remark != null">
+                    REMARK = #{s.remark, jdbcType=VARCHAR},
+                </if>
+                <if test="s.seq != null">
+                    SEQ = #{s.seq, jdbcType=INTEGER},
+                </if>
+                <if test="s.pid != null">
+                    PID = #{s.pid, jdbcType=VARCHAR},
+                </if>
+        </set>
+        <where>
+            <trim prefix="(" suffix=")" suffixOverrides="AND">
+	                <if test="w.id != null">
+	                    ID = #{w.id, jdbcType=VARCHAR}
+	                    AND
+	                </if>
+	                <if test="w.name != null">
+	                    NAME = #{w.name, jdbcType=VARCHAR}
+	                    AND
+	                </if>
+	                <if test="w.remark != null">
+	                    REMARK = #{w.remark, jdbcType=VARCHAR}
+	                    AND
+	                </if>
+	                <if test="w.seq != null">
+	                    SEQ = #{w.seq, jdbcType=INTEGER}
+	                    AND
+	                </if>
+	                <if test="w.pid != null">
+	                    PID = #{w.pid, jdbcType=VARCHAR}
+	                    AND
+	                </if>
+            </trim>
+        </where>
+    </update>
+    
+
+   	<update id="update" parameterType="sy.model.po.TrolePo">
+        UPDATE
+        <include refid="Table_Name" />
+		<set>
+			<if test="name != null">
+                    NAME = #{name, jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+                    REMARK = #{remark, jdbcType=VARCHAR},
+			</if>
+			<if test="seq != null">
+                    SEQ = #{seq, jdbcType=INTEGER},
+			</if>
+			<if test="pid != null">
+                    PID = #{pid, jdbcType=VARCHAR},
+			</if>
+		</set>
+		where
+			id = #{id}
+	</update>
+    
+    
+    
+    <delete id="delete">
+        delete from
+        <include refid="Table_Name" />
+        <where>
+            <include refid="Base_Where_NoStatus" />
+        </where>
+    </delete>
+    
+    
+    <select id="count" parameterType="java.util.Map" resultType="int">
+        select count(1) from
+        <include refid="Table_Name" />
+        <where>
+            <include refid="Base_Where" />
+        </where>
+    </select>
+    
+    <select id="selectOne" resultMap="BaseResultMap">
+        <include refid="Base_Select" />
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        <include refid="Base_Select" />
+    </select>
+    
+    <insert id="batchInsert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        <include refid="Table_Name" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    NAME,
+                    REMARK,
+                    SEQ,
+                    PID,
+        </trim>
+        values
+		<foreach collection="list" item="item" index="index" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+						#{item.name , jdbcType=VARCHAR},
+						#{item.remark , jdbcType=VARCHAR},
+						#{item.seq , jdbcType=INTEGER},
+						#{item.pid , jdbcType=VARCHAR},
+			</trim>
+		</foreach>
+    </insert>
+    
+    <delete id="batchDelete" parameterType="java.util.Map">
+	    delete from
+	    <include refid="Table_Name" />
+	    where id in
+	    <foreach item="item" collection="list" open="(" close=")" separator=",">
+#{item}	    </foreach>
+    </delete>
+    
+    <update id="batchTccStatusConfirm" parameterType="java.util.Map">
+	    update 
+	    <include refid="Table_Name" />
+		<set>
+			tcc_status = 1
+		</set>
+	    where id in
+	    <foreach item="item" collection="list" open="(" close=")" separator=",">
+#{item}	    </foreach>
+    </update> 
+    
+    <!-- 自定义sql start -->
+    
+    
+    <!-- 自定义sql end -->
+    
+</mapper>

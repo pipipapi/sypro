@@ -12,7 +12,7 @@
 			classpath:spring-ehcache.xml,
 			classpath:spring-druid.xml,
 			classpath:spring-tasks.xml,
-			classpath:sample-datasource.xml
+			classpath:service/ds/sample-datasource.xml
 
 		</param-value>
 	</context-param>
