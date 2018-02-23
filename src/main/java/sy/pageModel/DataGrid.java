@@ -11,16 +11,9 @@ import java.util.List;
  */
 public class DataGrid implements java.io.Serializable {
 
-	private Long total = 0L;
+	private Integer total = 0;
 	private List rows = new ArrayList();
 
-	public Long getTotal() {
-		return total;
-	}
-
-	public void setTotal(Long total) {
-		this.total = total;
-	}
 
 	public List getRows() {
 		return rows;
@@ -30,4 +23,11 @@ public class DataGrid implements java.io.Serializable {
 		this.rows = rows;
 	}
 
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
 }

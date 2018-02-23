@@ -6,7 +6,11 @@
 package sy.model.po;
 
 import com.dap.dao.BasePo;
+
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -14,7 +18,9 @@ import java.util.Date;
  */
 public class TuserPo extends BasePo {
 	private static final long serialVersionUID = -1L;
-	
+
+	private String id;
+
 	/**
 	 * 
 	 */
@@ -34,6 +40,8 @@ public class TuserPo extends BasePo {
 	 * 
 	 */
 	private String pwd;
+
+	private Set<TrolePo> roles;
 	
     
 	public void setCreatedatetime(Date value) {
@@ -70,5 +78,20 @@ public class TuserPo extends BasePo {
 	public String getPwd() {
 		return this.pwd;
 	}
-	
+
+	public Set<TrolePo> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<TrolePo> roles) {
+		this.roles = roles;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

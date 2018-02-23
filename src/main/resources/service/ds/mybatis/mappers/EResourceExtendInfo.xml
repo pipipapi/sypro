@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- tuser_trole -->
+
+<mapper namespace="sy.model.po.TresourcePo">
+
+    <resultMap id="ExtendResultMap" type="sy.model.po.TresourcePo">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="icon" column="ICON" jdbcType="VARCHAR"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="remark" column="REMARK" jdbcType="VARCHAR"/>
+        <result property="seq" column="SEQ" jdbcType="INTEGER"/>
+        <result property="url" column="URL" jdbcType="VARCHAR"/>
+        <result property="pid" column="PID" jdbcType="VARCHAR"/>
+        <result property="tresourcetypeId" column="TRESOURCETYPE_ID" jdbcType="VARCHAR"/>
+        <collection property="resourcetypes" column="TRESOURCETYPE_ID" javaType="java.util.List" select="selectResourceTypes"/>
+    </resultMap>
+
+    <select id="selectMyResource" resultMap="ExtendResultMap">
+        SELECT r.* from trole r
+        INNER JOIN tuser_trole ur on ur.tuser_id=r.id AND ur.tuser_id=#{userId}
+        INNER JOIN trole_tresource rr on rr.tresource_id=r.id
+        INNER JOIN tresource resource on resource.id=rr.tresource_id
+        INNER JOIN tresourcetype tt on tt.id=resource.tresource_id
+    </select>
+
+    <select id="selectResourceTypes">
+        SELECT * from tresourcetype where id=#{tresourcetypeId}
+    </select>
+
+</mapper>

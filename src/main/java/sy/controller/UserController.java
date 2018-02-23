@@ -1,10 +1,7 @@
 package sy.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.dap.exception.BusinessException;
 import com.dap.utils.DeepFieldCopy;
-import io.netty.util.internal.ObjectUtil;
-import org.aspectj.apache.bcel.ExceptionConstants;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +33,6 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private UserDaoImpl userDaoImpl;
-
 
 	@Autowired
 	private RoleDaoImpl roleDaoImpl;
@@ -72,7 +68,7 @@ public class UserController extends BaseController {
 			SessionInfo sessionInfo = new SessionInfo();
 			BeanUtils.copyProperties(tuserPo, sessionInfo);
 			sessionInfo.setIp(IpUtil.getIpAddr(request));
-			sessionInfo.setResourceList(userDaoImpl.resourceList(u.getId()));
+			sessionInfo.setResourceList(userDaoImpl.resourceList(tuserPo.getId()));
 			session.setAttribute(ConfigUtil.getSessionInfoName(), sessionInfo);
 
 			j.setObj(sessionInfo);
@@ -94,7 +90,7 @@ public class UserController extends BaseController {
 	public Json reg(User user) {
 		Json j = new Json();
 		try {
-			userService.reg(user);
+			userDaoImpl.reg(user);
 			j.setSuccess(true);
 			j.setMsg("注册成功！新注册的用户没有任何权限，请让管理员赋予权限后再使用本系统！");
 			j.setObj(user);
@@ -142,7 +138,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(User user, PageHelper ph) {
-		return userService.dataGrid(user, ph);
+		return userDaoImpl.dataGrid(user, ph);
 	}
 
 	/**
@@ -169,7 +165,7 @@ public class UserController extends BaseController {
 	public Json add(User user) {
 		Json j = new Json();
 		try {
-			userService.add(user);
+			userDaoImpl.add(user);
 			j.setSuccess(true);
 			j.setMsg("添加成功！");
 			j.setObj(user);
@@ -187,7 +183,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
-		User u = userService.get(id);
+		User u = userDaoImpl.get(id);
 		request.setAttribute("user", u);
 		return "/admin/userEdit";
 	}
@@ -203,7 +199,7 @@ public class UserController extends BaseController {
 	public Json edit(User user) {
 		Json j = new Json();
 		try {
-			userService.edit(user);
+			userDaoImpl.edit(user);
 			j.setSuccess(true);
 			j.setMsg("编辑成功！");
 			j.setObj(user);
@@ -226,7 +222,9 @@ public class UserController extends BaseController {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
 		Json j = new Json();
 		if (id != null && !id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己
-			userService.delete(id);
+			TuserPo delPo=new TuserPo();
+			delPo.setId(id);
+			userDaoImpl.delete(delPo);
 		}
 		j.setMsg("删除成功！");
 		j.setSuccess(true);
@@ -265,7 +263,7 @@ public class UserController extends BaseController {
 	public String grantPage(String ids, HttpServletRequest request) {
 		request.setAttribute("ids", ids);
 		if (ids != null && !ids.equalsIgnoreCase("") && ids.indexOf(",") == -1) {
-			User u = userService.get(ids);
+			User u = userDaoImpl.get(ids);
 			request.setAttribute("user", u);
 		}
 		return "/admin/userGrant";
@@ -281,7 +279,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Json grant(String ids, User user) {
 		Json j = new Json();
-		userService.grant(ids, user);
+		userDaoImpl.grant(ids, user);
 		j.setSuccess(true);
 		j.setMsg("授权成功！");
 		return j;
@@ -296,7 +294,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/editPwdPage")
 	public String editPwdPage(String id, HttpServletRequest request) {
-		User u = userService.get(id);
+		User u = userDaoImpl.get(id);
 		request.setAttribute("user", u);
 		return "/admin/userEditPwd";
 	}
@@ -311,9 +309,15 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Json editPwd(User user) {
 		Json j = new Json();
-		userService.editPwd(user);
-		j.setSuccess(true);
-		j.setMsg("编辑成功！");
+		try {
+			userDaoImpl.editPwd(user);
+			j.setSuccess(true);
+			j.setMsg("编辑成功！");
+		} catch (Exception e) {
+			j.setSuccess(false);
+			j.setMsg("编辑失败！");
+			e.printStackTrace();
+		}
 		return j;
 	}
 
@@ -341,7 +345,7 @@ public class UserController extends BaseController {
 		if (session != null) {
 			SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
 			if (sessionInfo != null) {
-				if (userService.editCurrentUserPwd(sessionInfo, oldPwd, pwd)) {
+				if (userDaoImpl.editCurrentUserPwd(sessionInfo, oldPwd, pwd)) {
 					j.setSuccess(true);
 					j.setMsg("编辑密码成功，下次登录生效！");
 				} else {
@@ -364,7 +368,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/currentUserRolePage")
 	public String currentUserRolePage(HttpServletRequest request, HttpSession session) {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
-		request.setAttribute("userRoles", JSON.toJSONString(roleService.tree(sessionInfo)));
+		request.setAttribute("userRoles", JSON.toJSONString(roleDaoImpl.tree(sessionInfo)));
 		return "/user/userRole";
 	}
 
@@ -376,7 +380,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/currentUserResourcePage")
 	public String currentUserResourcePage(HttpServletRequest request, HttpSession session) {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.getSessionInfoName());
-		request.setAttribute("userResources", JSON.toJSONString(resourceService.allTree(sessionInfo)));
+		request.setAttribute("userResources", JSON.toJSONString(resourceDaoImpl.allTree(sessionInfo)));
 		return "/user/userResource";
 	}
 
@@ -390,7 +394,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/loginCombobox")
 	@ResponseBody
 	public List<User> loginCombobox(String q) {
-		return userService.loginCombobox(q);
+		return userDaoImpl.loginCombobox(q);
 	}
 
 	/**
@@ -403,7 +407,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/loginCombogrid")
 	@ResponseBody
 	public DataGrid loginCombogrid(String q, PageHelper ph) {
-		return userService.loginCombogrid(q, ph);
+		return userDaoImpl.loginCombogrid(q, ph);
 	}
 
 }

@@ -6,6 +6,15 @@
 
 <mapper namespace="sy.model.po.TuserPo">
 
+    <resultMap id="ExtendResultMap" type="sy.model.po.TuserPo">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="createdatetime" column="CREATEDATETIME" jdbcType="TIMESTAMP"/>
+        <result property="modifydatetime" column="MODIFYDATETIME" jdbcType="TIMESTAMP"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="pwd" column="PWD" jdbcType="VARCHAR"/>
+        <collection property="roles" javaType="java.util.List" select="sy.model.po.TrolePo.selectList"/>
+    </resultMap>
+
     <select id="countBetweenMonths" parameterType="java.util.Map">
         select count(*) from Tuser t where HOUR(t.createdatetime)
         <![CDATA[ >= ]]>
@@ -14,9 +23,10 @@
         #{end}
     </select>
 
-    <select id="selectOneBringRole">
-        SELECT from Tuser t join t.troles role join fetch role.tresources resource
+    <select id="selectOneBringRole" resultMap="ExtendResultMap">
+        SELECT * from Tuser t
         where t.id = #{id}
     </select>
+
 
 </mapper>

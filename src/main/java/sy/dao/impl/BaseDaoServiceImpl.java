@@ -14,6 +14,10 @@ import java.util.List;
 public class BaseDaoServiceImpl extends DaoSupportImpl implements IDaoService{
 
 
+    /**
+     * 需要注入一个sqlSessionFactory来帮助初始化DataSource
+     * @param sqlSessionFactory
+     */
     @Autowired
     @Override
     public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory){

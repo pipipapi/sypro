@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- tuser_trole -->
+
+<mapper namespace="sy.model.po.TrolePo">
+    <resultMap id="ExtendResultMap" type="sy.model.po.TrolePo">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="remark" column="REMARK" jdbcType="VARCHAR"/>
+        <result property="seq" column="SEQ" jdbcType="INTEGER"/>
+        <result property="pid" column="PID" jdbcType="VARCHAR"/>
+        <collection property="resources" javaType="java.util.List" select="sy.model.po.TresourcePo.selectList"/>
+        <collection property="roles" column="id" javaType="java.util.List" select="selectChildrenRoles"/>
+    </resultMap>
+
+    <select id="selectChildrenRoles" resultMap="ExtendResultMap">
+        SELECT
+        <include refid="Base_Column" />
+        from trole where pid=#{pid}
+    </select>
+
+    <select id="selectMyRoles" resultMap="ExtendResultMap">
+        SELECT
+        <include refid="Base_Column" />
+        from trole r
+        INNER JOIN tuser_trole tr
+        on t.id=tr.trole_id and tr.tuser_id=#{userId}
+    </select>
+</mapper>

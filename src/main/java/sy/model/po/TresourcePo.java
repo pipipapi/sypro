@@ -51,6 +51,8 @@ public class TresourcePo extends BasePo {
 	 * 
 	 */
 	private String tresourcetypeId;
+
+	private TresourcePo parent;
 	
     
 	public void setIcon(String value) {
@@ -121,5 +123,13 @@ public class TresourcePo extends BasePo {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public TresourcePo getParent() {
+		return parent;
+	}
+
+	public void setParent(TresourcePo parent) {
+		this.parent = parent;
 	}
 }

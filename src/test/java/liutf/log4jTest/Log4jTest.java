@@ -8,15 +8,9 @@
  */
 package liutf.log4jTest;
 
-import java.io.IOException;
+import org.apache.log4j.*;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.HTMLLayout;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
+import java.io.IOException;
 
 /** 
  * @description: TODO
@@ -29,7 +23,7 @@ public class Log4jTest {
 	public Logger log = Logger.getLogger(Log4jTest.class);
 	
 	public void doTest() throws IOException{
-		BasicConfigurator.configure();
+		/*BasicConfigurator.configure();
 		
 //		HTMLLayout layout = new HTMLLayout();
 		SimpleLayout layout = new SimpleLayout();
@@ -44,7 +38,7 @@ public class Log4jTest {
 		log.info("info--");
 		log.warn("warn--");
 		log.error("error--");
-		log.info("message");
+		log.info("message");*/
 	}
 	
 	
