@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import sy.dao.IDaoService;
+import sy.dao.ResourceTypeDao;
 import sy.model.po.TresourcePo;
 import sy.model.po.TresourcetypePo;
 import sy.pageModel.ResourceType;
@@ -15,11 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ResourceTypeDaoImpl  extends BaseDaoServiceImpl implements IDaoService {
-
-
-	@Autowired
-	private ResourceTypeDaoImpl resourceTypeDao;
+public class ResourceTypeDaoImpl  extends BaseDaoServiceImpl implements ResourceTypeDao {
 
 	public TresourcePo getById(String id) {
 
@@ -27,7 +24,7 @@ public class ResourceTypeDaoImpl  extends BaseDaoServiceImpl implements IDaoServ
 
 	}
 
-
+	@Override
 	@Cacheable(value = "resourceTypeServiceCache", key = "'resourceTypeList'")
 	public List<ResourceType> getResourceTypeList() {
 		List<TresourcetypePo> l = this.queryListByBean(TresourcePo.class, (Object)null );

@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<!-- 引入项目配置文件 -->
-	<!-- <context:property-placeholder location="classpath:config1.properties" /> -->
+	<!-- <context:property-placeholder location="classpath:config.properties" /> -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>

@@ -12,7 +12,7 @@
         <result property="modifydatetime" column="MODIFYDATETIME" jdbcType="TIMESTAMP"/>
         <result property="name" column="NAME" jdbcType="VARCHAR"/>
         <result property="pwd" column="PWD" jdbcType="VARCHAR"/>
-        <collection property="roles" javaType="java.util.List" select="sy.model.po.TrolePo.selectList"/>
+        <collection property="roles" column="ID" javaType="java.util.Set" select="sy.model.po.TuserTrolePo.selectMyRoles"/>
     </resultMap>
 
     <select id="countBetweenMonths" parameterType="java.util.Map">

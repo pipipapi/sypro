@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import sy.dao.IDaoService;
+import sy.dao.ResourceDao;
 import sy.model.bean.TresourceBean;
 import sy.model.po.TresourcePo;
 import sy.model.po.TrolePo;
@@ -18,9 +19,9 @@ import sy.pageModel.Tree;
 import java.util.*;
 
 @Service
-public class ResourceDaoImpl  extends BaseDaoServiceImpl implements IDaoService {
+public class ResourceDaoImpl  extends BaseDaoServiceImpl implements ResourceDao {
 
-
+    @Override
     public List<Tree> allTree(SessionInfo sessionInfo) {
         List<TresourcePo> l = null;
         List<Tree> lt = new ArrayList<Tree>();
@@ -53,7 +54,7 @@ public class ResourceDaoImpl  extends BaseDaoServiceImpl implements IDaoService 
         return lt;
     }
 
-
+    @Override
     public List<Tree> tree(SessionInfo sessionInfo) {
         List<TresourcePo> l = null;
         List<Tree> lt = new ArrayList<Tree>();

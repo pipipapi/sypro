@@ -157,7 +157,6 @@
 	                TRESOURCETYPE_ID= #{tresourcetypeId , jdbcType=VARCHAR}
 	                AND
 	            </if>
-            tcc_status = 1
         </trim>
     </sql>
     
@@ -426,17 +425,6 @@
 	    <foreach item="item" collection="list" open="(" close=")" separator=",">
 #{item}	    </foreach>
     </delete>
-    
-    <update id="batchTccStatusConfirm" parameterType="java.util.Map">
-	    update 
-	    <include refid="Table_Name" />
-		<set>
-			tcc_status = 1
-		</set>
-	    where id in
-	    <foreach item="item" collection="list" open="(" close=")" separator=",">
-#{item}	    </foreach>
-    </update> 
     
     <!-- 自定义sql start -->
     

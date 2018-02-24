@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sy.dao.ResourceTypeDao;
 import sy.dao.impl.ResourceDaoImpl;
 import sy.dao.impl.ResourceTypeDaoImpl;
 import sy.model.po.TresourcePo;
@@ -35,7 +36,7 @@ public class ResourceController extends BaseController {
 	private ResourceDaoImpl resourceDao;
 
 	@Autowired
-	private ResourceTypeDaoImpl resourceTypeDao;
+	private ResourceTypeDao resourceTypeDao;
 
 	/**
 	 * 获得资源树(资源类型为菜单类型)

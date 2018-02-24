@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- tuser_trole -->
+
+<mapper namespace="sy.model.po.TuserTrolePo">
+
+    <select id="selectMyRoles" resultMap="sy.model.po.TrolePo.ExtendResultMap">
+      SELECT r.* from tuser_trole u
+       LEFT JOIN trole r on r.id=u.trole_id
+      where u.tuser_id=#{id}
+    </select>
+
+</mapper>

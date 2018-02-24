@@ -4,11 +4,13 @@ package sy.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sy.dao.ResourceTypeDao;
 import sy.dao.impl.ResourceDaoImpl;
 import sy.dao.impl.ResourceTypeDaoImpl;
 import sy.dao.impl.RoleDaoImpl;
 import sy.dao.impl.UserDaoImpl;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -29,10 +31,11 @@ public class InitController {
 	private RoleDaoImpl roleDaoImpl;
 
 	@Autowired
-	private ResourceDaoImpl resourceDaoImpl;
+	private ResourceTypeDao resourceTypeDao;
 
 	@Autowired
-	private ResourceTypeDaoImpl resourceTypeDaoImpl;
+	private ResourceDaoImpl resourceDaoImpl;
+
 
 
 	/*

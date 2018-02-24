@@ -338,5 +338,17 @@ public class UserDaoImpl extends BaseDaoServiceImpl implements IDaoService {
         return ul;
     }
 
+    public User login(User user) {
+        TuserPo tuserPo=new TuserPo();
+        tuserPo.setName(user.getName());
+        tuserPo.setPwd(MD5Util.md5(user.getPwd()));
+        TuserPo t = this.selectOne(tuserPo);
+        if (t != null) {
+            BeanUtils.copyProperties(t, user);
+            return user;
+        }
+        return null;
+    }
+
 }
 

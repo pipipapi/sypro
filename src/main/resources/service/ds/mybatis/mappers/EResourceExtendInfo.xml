@@ -15,15 +15,15 @@
         <result property="url" column="URL" jdbcType="VARCHAR"/>
         <result property="pid" column="PID" jdbcType="VARCHAR"/>
         <result property="tresourcetypeId" column="TRESOURCETYPE_ID" jdbcType="VARCHAR"/>
-        <collection property="resourcetypes" column="TRESOURCETYPE_ID" javaType="java.util.List" select="selectResourceTypes"/>
+        <collection property="resourcetypes" column="TRESOURCETYPE_ID" javaType="java.util.Set" select="selectResourceTypes"/>
     </resultMap>
 
     <select id="selectMyResource" resultMap="ExtendResultMap">
-        SELECT r.* from trole r
+        SELECT resource.* from trole r
         INNER JOIN tuser_trole ur on ur.tuser_id=r.id AND ur.tuser_id=#{userId}
         INNER JOIN trole_tresource rr on rr.tresource_id=r.id
         INNER JOIN tresource resource on resource.id=rr.tresource_id
-        INNER JOIN tresourcetype tt on tt.id=resource.tresource_id
+        INNER JOIN tresourcetype tt on tt.id=resource.tresourcetype_id
     </select>
 
     <select id="selectResourceTypes">

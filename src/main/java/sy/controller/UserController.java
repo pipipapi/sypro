@@ -59,16 +59,15 @@ public class UserController extends BaseController {
 		    throw new Exception("用户名不可为空");
         }
 
-        TuserPo tuserPo= DeepFieldCopy.transform(user, TuserPo.class);
-		tuserPo = userDaoImpl.selectOne(tuserPo);
-		if (tuserPo != null) {
+		User u = userDaoImpl.login(user);
+		if (u != null) {
 			j.setSuccess(true);
 			j.setMsg("登陆成功！");
 
 			SessionInfo sessionInfo = new SessionInfo();
-			BeanUtils.copyProperties(tuserPo, sessionInfo);
+			BeanUtils.copyProperties(u, sessionInfo);
 			sessionInfo.setIp(IpUtil.getIpAddr(request));
-			sessionInfo.setResourceList(userDaoImpl.resourceList(tuserPo.getId()));
+			sessionInfo.setResourceList(userDaoImpl.resourceList(u.getId()));
 			session.setAttribute(ConfigUtil.getSessionInfoName(), sessionInfo);
 
 			j.setObj(sessionInfo);

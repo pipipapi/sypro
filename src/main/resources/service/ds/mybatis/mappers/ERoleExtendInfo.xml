@@ -11,8 +11,8 @@
         <result property="remark" column="REMARK" jdbcType="VARCHAR"/>
         <result property="seq" column="SEQ" jdbcType="INTEGER"/>
         <result property="pid" column="PID" jdbcType="VARCHAR"/>
-        <collection property="resources" javaType="java.util.List" select="sy.model.po.TresourcePo.selectList"/>
-        <collection property="roles" column="id" javaType="java.util.List" select="selectChildrenRoles"/>
+        <collection property="resources" column="ID" javaType="java.util.Set" select="sy.model.po.TresourcePo.selectMyResource"/>
+        <collection property="roles" column="ID" javaType="java.util.Set" select="selectChildrenRoles"/>
     </resultMap>
 
     <select id="selectChildrenRoles" resultMap="ExtendResultMap">
@@ -21,11 +21,11 @@
         from trole where pid=#{pid}
     </select>
 
-    <select id="selectMyRoles" resultMap="ExtendResultMap">
-        SELECT
-        <include refid="Base_Column" />
-        from trole r
-        INNER JOIN tuser_trole tr
-        on t.id=tr.trole_id and tr.tuser_id=#{userId}
-    </select>
+    <!--<select id="selectMyRoles" resultMap="ExtendResultMap">-->
+        <!--SELECT-->
+        <!--<include refid="Base_Column" />-->
+        <!--from trole r-->
+        <!--INNER JOIN tuser_trole tr-->
+        <!--on t.id=tr.trole_id and tr.tuser_id=#{userId}-->
+    <!--</select>-->
 </mapper>
