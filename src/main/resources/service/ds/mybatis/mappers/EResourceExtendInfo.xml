@@ -6,15 +6,7 @@
 
 <mapper namespace="sy.model.po.TresourcePo">
 
-    <resultMap id="ExtendResultMap" type="sy.model.po.TresourcePo">
-        <result property="id" column="ID" jdbcType="VARCHAR"/>
-        <result property="icon" column="ICON" jdbcType="VARCHAR"/>
-        <result property="name" column="NAME" jdbcType="VARCHAR"/>
-        <result property="remark" column="REMARK" jdbcType="VARCHAR"/>
-        <result property="seq" column="SEQ" jdbcType="INTEGER"/>
-        <result property="url" column="URL" jdbcType="VARCHAR"/>
-        <result property="pid" column="PID" jdbcType="VARCHAR"/>
-        <result property="tresourcetypeId" column="TRESOURCETYPE_ID" jdbcType="VARCHAR"/>
+    <resultMap id="ExtendResultMap" extends="BaseResultMap" type="sy.model.po.TresourcePo">
         <collection property="resourcetypes" column="TRESOURCETYPE_ID" javaType="java.util.Set" select="selectResourceTypes"/>
     </resultMap>
 
