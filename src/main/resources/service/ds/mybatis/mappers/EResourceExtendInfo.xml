@@ -7,19 +7,28 @@
 <mapper namespace="sy.model.po.TresourcePo">
 
     <resultMap id="ExtendResultMap" extends="BaseResultMap" type="sy.model.po.TresourcePo">
-        <collection property="resourcetypes" column="TRESOURCETYPE_ID" javaType="java.util.Set" select="selectResourceTypes"/>
+        <collection property="resourcetypes" column="TRESOURCETYPE_ID" javaType="java.util.Set" select="sy.model.po.TresourcetypePo.selectResourceTypes"/>
     </resultMap>
 
-    <select id="selectMyResource" resultMap="ExtendResultMap">
-        SELECT resource.* from trole r
-        INNER JOIN tuser_trole ur on ur.tuser_id=r.id AND ur.tuser_id=#{userId}
-        INNER JOIN trole_tresource rr on rr.tresource_id=r.id
-        INNER JOIN tresource resource on resource.id=rr.tresource_id
-        INNER JOIN tresourcetype tt on tt.id=resource.tresourcetype_id
+    <select id="selectMyResourceForTree" resultMap="ExtendResultMap" parameterType="java.util.Map">
+        select
+        re.id,re.icon,re.NAME,re.REMARK,re.SEQ,re.URL,re.PID,re.TRESOURCETYPE_ID
+        from   trole_tresource tr
+        left join tresource re on re.id=tr.tresource_id
+        left join tuser_trole u on u.trole_id=tr.trole_id
+        where u.tuser_id = #{userId}
+        order by re.id
     </select>
 
-    <select id="selectResourceTypes">
-        SELECT * from tresourcetype where id=#{tresourcetypeId}
+
+    <select id="selectMyResource" resultMap="ExtendResultMap" parameterType="java.util.Map">
+        select
+        re.id,re.icon,re.NAME,re.REMARK,re.SEQ,re.URL,re.PID,re.TRESOURCETYPE_ID
+        from   trole_tresource tr
+        left join tresource re on re.id=tr.tresource_id
+        left join tuser_trole u on u.trole_id=tr.trole_id
+        where u.trole_id = #{roleId}
+        order by re.id
     </select>
 
 </mapper>

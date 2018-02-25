@@ -7,6 +7,7 @@ package sy.model.po;
 
 import com.dap.dao.BasePo;
 import java.util.Date;
+import java.util.Set;
 
 
 /**
@@ -53,6 +54,8 @@ public class TresourcePo extends BasePo {
 	private String tresourcetypeId;
 
 	private TresourcePo parent;
+
+	private Set<TresourcetypePo> resourcetypes;
 	
     
 	public void setIcon(String value) {
@@ -131,5 +134,13 @@ public class TresourcePo extends BasePo {
 
 	public void setParent(TresourcePo parent) {
 		this.parent = parent;
+	}
+
+	public Set<TresourcetypePo> getResourcetypes() {
+		return resourcetypes;
+	}
+
+	public void setResourcetypes(Set<TresourcetypePo> resourcetypes) {
+		this.resourcetypes = resourcetypes;
 	}
 }

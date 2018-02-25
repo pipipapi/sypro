@@ -5,13 +5,8 @@
 <!-- tuser_trole -->
 
 <mapper namespace="sy.model.po.TrolePo">
-    <resultMap id="ExtendResultMap" type="sy.model.po.TrolePo">
-        <result property="id" column="ID" jdbcType="VARCHAR"/>
-        <result property="name" column="NAME" jdbcType="VARCHAR"/>
-        <result property="remark" column="REMARK" jdbcType="VARCHAR"/>
-        <result property="seq" column="SEQ" jdbcType="INTEGER"/>
-        <result property="pid" column="PID" jdbcType="VARCHAR"/>
-        <collection property="resources" column="ID" javaType="java.util.Set" select="sy.model.po.TresourcePo.selectMyResource"/>
+    <resultMap id="ExtendResultMap" extends="BaseResultMap" type="sy.model.po.TrolePo">
+        <collection property="resources" column="ID" javaType="java.util.Set" select="sy.model.po.TresourcePo.selectMyResourceForTree"/>
         <collection property="roles" column="ID" javaType="java.util.Set" select="selectChildrenRoles"/>
     </resultMap>
 

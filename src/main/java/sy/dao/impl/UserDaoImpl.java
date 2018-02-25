@@ -40,7 +40,10 @@ public class UserDaoImpl extends BaseDaoServiceImpl implements IDaoService {
             Set<TrolePo> roles = t.getRoles();
             if (roles != null && !roles.isEmpty()) {
                 for (TrolePo role : roles) {
-                    Set<TresourcePo> resources = role.getResources();
+                    //Set<TresourcePo> resources = role.getResources();
+                    Map<String,Object> resourceParam=new HashMap();
+                    resourceParam.put("roleId", role.getId());
+                    List<TresourcePo> resources = this.selectList("selectMyResource",resourceParam);
                     if (resources != null && !resources.isEmpty()) {
                         for (TresourcePo resource : resources) {
                             if (resource != null && resource.getUrl() != null) {

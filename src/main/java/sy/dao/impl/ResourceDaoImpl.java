@@ -64,7 +64,7 @@ public class ResourceDaoImpl  extends BaseDaoServiceImpl implements ResourceDao 
 
         if (sessionInfo != null) {
             params.put("userId", sessionInfo.getId());// 查自己有权限的资源
-            l = this.selectList("selectMyResource", params);
+            l = this.selectList("selectMyResourceForTree", params);
         } else {
             TresourceBean bean=new TresourceBean();
             bean.addOrderBy(Order.desc("seq"));

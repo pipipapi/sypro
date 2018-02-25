@@ -7,9 +7,7 @@ package sy.model.po;
 
 import com.dap.dao.BasePo;
 
-import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 

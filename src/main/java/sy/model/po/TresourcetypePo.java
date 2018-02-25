@@ -16,10 +16,11 @@ public class TresourcetypePo extends BasePo {
 	private static final long serialVersionUID = -1L;
 	
 	/**
-	 * 
+	 *
 	 */
 	private String name;
-	
+
+	private String id;
     
 	public void setName(String value) {
 		this.name = value;
@@ -28,5 +29,12 @@ public class TresourcetypePo extends BasePo {
 	public String getName() {
 		return this.name;
 	}
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }
