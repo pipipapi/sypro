@@ -35,7 +35,7 @@
 			<table class="table table-hover table-condensed">
 				<tr>
 					<th>编号</th>
-					<td><input name="id" type="text" class="span2" value="${user.id}" readonly="readonly"></td>
+					<td><input name="id" type="text" class="span2" value="${user.id}"></td>
 					<th>登录名称</th>
 					<td><input name="name" type="text" placeholder="请输入登录名称" class="easyui-validatebox span2" data-options="required:true" value=""></td>
 				</tr>
