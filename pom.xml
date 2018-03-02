@@ -273,7 +273,7 @@
         <profile>
             <id>local</id>
             <properties>
-                <configDir>local-config</configDir>
+                <configDir>local</configDir>
             </properties>
             <distributionManagement>
                 <repository>

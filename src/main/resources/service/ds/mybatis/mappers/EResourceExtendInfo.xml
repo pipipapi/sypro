@@ -16,8 +16,8 @@
         from   trole_tresource tr
         left join tresource re on re.id=tr.tresource_id
         left join tuser_trole u on u.trole_id=tr.trole_id
-        where u.tuser_id = #{userId}
-        order by re.id
+        where u.tuser_id = #{userId} and re.TRESOURCETYPE_ID=0
+        order by re.seq
     </select>
 
 
@@ -28,7 +28,7 @@
         left join tresource re on re.id=tr.tresource_id
         left join tuser_trole u on u.trole_id=tr.trole_id
         where u.trole_id = #{roleId}
-        order by re.id
+        order by re.seq
     </select>
 
 </mapper>

@@ -11,11 +11,9 @@
     </resultMap>
 
     <select id="countBetweenMonths" resultMap="ExtendResultMap" parameterType="java.util.Map">
-        select count(*) from Tuser t where HOUR(t.createdatetime)
-        <![CDATA[ >= ]]>
-        #{start} and HOUR(t.createdatetime)
-        <![CDATA[ < ]]>
-        #{end}
+        select count(*) from Tuser t where
+        HOUR(t.createdatetime)  <![CDATA[ >= ]]> #{start} and
+        HOUR(t.createdatetime)  <![CDATA[ < ]]>  #{end}
     </select>
 
     <select id="selectOneBringRole" resultMap="ExtendResultMap">

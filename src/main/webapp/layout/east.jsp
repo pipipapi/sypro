@@ -26,7 +26,8 @@
 		<div id="layout_east_calendar"></div>
 	</div>
 	<div data-options="region:'center',border:false" style="overflow: hidden;">
-		<div id="layout_east_onlinePanel" data-options="fit:true,border:false" title="SYPRO收到的捐助">
+		<div id="layout_east_onlinePanel" data-options="fit:true,border:false" title="功能开发者。。。">
+			<!--
 			<div class="well well-small" style="margin: 3px;">
 				<a href="https://me.alipay.com/sypro" target="_blank"><img alt="捐助SyPro" src="${pageContext.request.contextPath}/style/images/alipay.jpg" /></a>
 				<hr />
@@ -63,6 +64,7 @@
 				<hr />
 				如果发现系统有BUG，请给我发Email:89333367@qq.com
 			</div>
+			-->
 		</div>
 	</div>
 </div>
